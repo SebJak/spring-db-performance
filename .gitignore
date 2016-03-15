@@ -1,3 +1,8 @@
+#IntelliJ
+/.idea
+/spring-sql-perfromance.iml
+
+
 *.class
 application.properties
 
@@ -5,9 +10,8 @@ application.properties
 .mtj.tmp/
 
 #Gradle project:
-.gradle/
-gradle/
-build/
+/build
+/.gradle
 
 # Package Files #
 *.jar
