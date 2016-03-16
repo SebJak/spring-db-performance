@@ -9,6 +9,6 @@ public class UserService implements UserServiceApi {
 
     @Override
     public void save(User user) {
-        String castException = (String) user;
+        //TODO write tests and implement this method.
     }
 }
