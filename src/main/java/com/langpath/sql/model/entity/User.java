@@ -14,11 +14,10 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name="USERS")
-@Data
 public class User implements Serializable{
 
     @Id
     private Long id;
 
-    private String name;
+    public String name;
 }
