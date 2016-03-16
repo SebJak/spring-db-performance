@@ -3,14 +3,19 @@ package com.langpath.sql.model.entity.user;
 import com.langpath.sql.model.entity.base.BaseEntity;
 import com.langpath.sql.model.entity.word.WordGroup;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.Set;
 
 /**
  * Created by Sebastian on 2016-03-14.
+ *
+ * The entity represents User details.
  */
+
 @Data
+@EqualsAndHashCode(callSuper=true)
 @Entity
 @Table(name="USERS")
 public class User extends BaseEntity {

@@ -7,13 +7,15 @@ import java.io.Serializable;
 
 /**
  * Created by Sebastian on 2016-03-16.
+ *
+ * Base entity. Keeps only common values.
  */
-@MappedSuperclass
 @Data
+@MappedSuperclass
 public class BaseEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
 }

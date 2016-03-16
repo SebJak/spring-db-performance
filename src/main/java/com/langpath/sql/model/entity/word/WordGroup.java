@@ -12,9 +12,12 @@ import java.util.Set;
 
 /**
  * Created by Sebastian on 2016-03-16.
+ *
+ * The entity represents WordGroup detials.
  */
+
 @Data
-@EqualsAndHashCode(exclude={"users"})
+@EqualsAndHashCode(callSuper = true, exclude={"users"})
 @Entity
 @Table(name="WORD_GROUP")
 public class WordGroup extends BaseEntity {
