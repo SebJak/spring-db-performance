@@ -1,6 +1,6 @@
 package com.langpath.service.api;
 
-import com.langpath.sql.model.entity.User;
+import com.langpath.sql.model.entity.user.User;
 
 /**
  * Created by sjakowski on 2016-03-16.
