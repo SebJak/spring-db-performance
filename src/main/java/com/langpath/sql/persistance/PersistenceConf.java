@@ -19,7 +19,7 @@ import java.util.Properties;
  */
 @Configuration
 @EnableTransactionManagement
-public class PersistanceConf {
+public class PersistenceConf {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
