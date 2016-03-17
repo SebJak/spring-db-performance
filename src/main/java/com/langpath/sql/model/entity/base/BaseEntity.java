@@ -1,6 +1,9 @@
 package com.langpath.sql.model.entity.base;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +16,10 @@ import java.io.Serializable;
 @Data
 @MappedSuperclass
 public class BaseEntity implements Serializable {
+
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    private static long serialVersionUID = 1l;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

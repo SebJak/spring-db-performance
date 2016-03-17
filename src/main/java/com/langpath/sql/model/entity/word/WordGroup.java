@@ -4,8 +4,7 @@ import com.langpath.sql.model.entity.base.BaseEntity;
 import com.langpath.sql.model.entity.user.User;
 import com.langpath.sql.model.enums.Language;
 import com.langpath.sql.model.enums.ValidationState;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -21,6 +20,10 @@ import java.util.Set;
 @Entity
 @Table(name="WORD_GROUP")
 public class WordGroup extends BaseEntity {
+
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    private static long serialVersionUID = 1l;
 
     private String name;
 

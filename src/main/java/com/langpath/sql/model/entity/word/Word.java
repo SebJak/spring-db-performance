@@ -2,8 +2,7 @@ package com.langpath.sql.model.entity.word;
 
 import com.langpath.sql.model.entity.base.BaseEntity;
 import com.langpath.sql.model.enums.Language;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -17,6 +16,10 @@ import javax.persistence.*;
 @Entity
 @Table(name="WORD")
 public class Word extends BaseEntity {
+
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    private static long serialVersionUID = 1l;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "sourceId")

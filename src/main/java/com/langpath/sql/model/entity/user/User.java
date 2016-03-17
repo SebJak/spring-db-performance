@@ -2,8 +2,7 @@ package com.langpath.sql.model.entity.user;
 
 import com.langpath.sql.model.entity.base.BaseEntity;
 import com.langpath.sql.model.entity.word.WordGroup;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -19,6 +18,10 @@ import java.util.Set;
 @Entity
 @Table(name="USERS")
 public class User extends BaseEntity {
+
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    private static long serialVersionUID = 1l;
 
     private String firstName;
 
