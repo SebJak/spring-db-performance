@@ -19,7 +19,7 @@ public class Word extends BaseEntity {
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
-    private static long serialVersionUID = 1l;
+    static long serialVersionUID = 1l;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "sourceId")

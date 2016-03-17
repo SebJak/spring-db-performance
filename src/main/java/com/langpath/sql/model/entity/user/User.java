@@ -21,7 +21,7 @@ public class User extends BaseEntity {
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
-    private static long serialVersionUID = 1l;
+    static long serialVersionUID = 1l;
 
     private String firstName;
 

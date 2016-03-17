@@ -19,7 +19,7 @@ public class BaseEntity implements Serializable {
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
-    private static long serialVersionUID = 1l;
+    static long serialVersionUID = 1l;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
