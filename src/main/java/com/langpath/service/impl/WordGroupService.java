@@ -4,28 +4,29 @@ import com.langpath.service.api.WordGroupServiceApi;
 import com.langpath.sql.model.entity.word.WordGroup;
 
 import java.util.Collection;
+import java.util.Optional;
 
 /**
  * Created by Sebastian on 2016-03-18.
  */
 public class WordGroupService implements WordGroupServiceApi{
     @Override
-    public WordGroup save(WordGroup word) {
+    public Optional<WordGroup> save(WordGroup word) {
         return null;
     }
 
     @Override
-    public WordGroup update(WordGroup word) {
+    public Optional<WordGroup> update(WordGroup word) {
         return null;
     }
 
     @Override
-    public WordGroup findById(Long id) {
+    public Optional<WordGroup> findById(Long id) {
         return null;
     }
 
     @Override
-    public Collection<WordGroup> findAll() {
+    public Optional<Collection<WordGroup>> findAll() {
         return null;
     }
 

@@ -1,7 +1,7 @@
 package com.langpath.util.impl;
 
 import com.google.common.io.Files;
-import com.langpath.util.TimeLogger;
+import com.langpath.util.api.TimeLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
