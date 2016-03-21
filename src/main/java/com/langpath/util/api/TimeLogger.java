@@ -5,7 +5,7 @@ package com.langpath.util.api;
  */
 public interface TimeLogger {
 
-    void logTime(String method, int count, long time);
+    void logTime(String method, int count);
 
     default StringBuilder prepareLog(final String method, final int count, final long time) {
         StringBuilder value = new StringBuilder();

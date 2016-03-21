@@ -4,7 +4,6 @@ import com.langpath.sql.model.entity.word.Word;
 import com.langpath.sql.model.enums.Language;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 /**

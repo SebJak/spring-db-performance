@@ -28,6 +28,11 @@ public class UserService implements UserServiceApi {
     }
 
     @Override
+    public Optional<Collection<User>> save(Iterable<User> word) {
+        return null;
+    }
+
+    @Override
     public Optional<User> update(User word) {
         return null;
     }

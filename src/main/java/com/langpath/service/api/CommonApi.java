@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface CommonApi<K,T> {
     Optional<K> save(K word);
 
+    Optional<Collection<K>> save(Iterable<K> word);
+
     Optional<K> update(K word);
 
     Optional<K> findById(T id);

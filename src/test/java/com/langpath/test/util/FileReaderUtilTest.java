@@ -1,6 +1,6 @@
 package com.langpath.test.util;
 
-import org.junit.BeforeClass;
+import com.langpath.util.FileReaderUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

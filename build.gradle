@@ -22,7 +22,9 @@ dependencies {
     //DataBase
     compile 'postgresql:postgresql:9.1-901-1.jdbc4'
 
-    compile 'junit:junit:4.12'
+    testCompile 'org.springframework.boot:spring-boot-starter-test:1.3.3.RELEASE'
+    testCompile 'junit:junit:4.12'
+
 
 }
 

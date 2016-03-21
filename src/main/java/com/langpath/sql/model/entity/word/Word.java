@@ -21,7 +21,7 @@ public class Word extends BaseEntity {
     @Setter(AccessLevel.NONE)
     static long serialVersionUID = 1l;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "sourceId")
     private Word source;
 
@@ -30,7 +30,7 @@ public class Word extends BaseEntity {
 
     private String value;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE )
     @JoinColumn(name = "wordGroupId")
     private WordGroup wordGroup;
 }

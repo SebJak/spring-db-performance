@@ -1,31 +1,37 @@
-package com.langpath.test.util;
+package com.langpath.util;
 
+import com.langpath.service.impl.WordGroupService;
 import com.langpath.sql.model.entity.word.Word;
 import com.langpath.sql.model.entity.word.WordGroup;
 import com.langpath.sql.model.enums.Language;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Sebastian on 2016-03-19.
  */
+@Service
 public class FileReaderUtil {
 
     private final Path FILE_PATH;
 
-    public FileReaderUtil(String fileName) {
+    @Autowired
+    private WordGroupService wordGroupService;
+
+    @Autowired
+    public FileReaderUtil(@Value("${words.fileName}") String fileName) {
         this.FILE_PATH = Paths.get(fileName);
     }
 
     public List<String> readLines(int count) {
-        assert FILE_PATH == null : "The FILE_PATH is null, You need to initialize FileReaderUtil.";
+        assert FILE_PATH != null : "The FILE_PATH is null, You need to initialize FileReaderUtil.";
         List<String> lines = new ArrayList<>();
         try {
             Files.lines(FILE_PATH).limit(count).forEach(line -> lines.add(line));
@@ -35,13 +41,21 @@ public class FileReaderUtil {
         return lines;
     }
 
-    public Map<Word, Word> readWords(int count) {
-        assert FILE_PATH == null : "The FILE_PATH is null, You need to initialize FileReaderUtil.";
-        Map<Word, Word> words = new HashMap<>();
+    public Collection<Word> readWords(int count) {
+        assert FILE_PATH != null : "The FILE_PATH is null, You need to initialize FileReaderUtil.";
+        Collection<Word> words = new ArrayList<>();
+        Optional<WordGroup> wordGroupOpt = wordGroupService.getRandom();
+        WordGroup wordGroup;
+        if(wordGroupOpt.isPresent()) {
+            wordGroup = wordGroupOpt.get();
+        }
+        else{
+            wordGroup = new WordGroup();
+            wordGroup.setName("Word Group");
+            wordGroup.setSourceLang(Language.PL);
+        }
         List<String> stringWords = readLines(count);
-        WordGroup wordGroup = new WordGroup();
-        wordGroup.setName("Word Group");
-        wordGroup.setSourceLang(Language.PL);
+
         stringWords.stream().forEach(line -> {
             String[] splitedLine = line.split("::");
             Word w1 = new Word();
@@ -53,8 +67,10 @@ public class FileReaderUtil {
             w2.setLang(Language.PL);
             w2.setValue(splitedLine[1]);
             w2.setWordGroup(wordGroup);
+            w2.setSource(w1);
 
-            words.put(w1,w2);
+            words.add(w1);
+            words.add(w2);
         });
 
         return words;
