@@ -4,7 +4,7 @@ spring-sql-perfromance.iml
 
 
 *.class
-application.properties
+#application.properties
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
