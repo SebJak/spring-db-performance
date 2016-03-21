@@ -3,6 +3,7 @@ package com.langpath.sql.persistance;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -18,6 +19,7 @@ import java.util.Properties;
  * Created by Sebastian on 2016-03-14.
  */
 @Configuration
+@EnableJpaRepositories(basePackages = "com.langpath.sql.repositories")
 @EnableTransactionManagement
 public class PersistenceConf {
 
