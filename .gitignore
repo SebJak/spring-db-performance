@@ -1,6 +1,6 @@
 #IntelliJ
 /.idea
-spring-sql-perfromance.iml
+*.iml
 
 
 *.class
