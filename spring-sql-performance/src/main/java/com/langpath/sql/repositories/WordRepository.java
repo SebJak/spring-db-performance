@@ -3,6 +3,7 @@ package com.langpath.sql.repositories;
 import com.langpath.sql.model.entity.word.Word;
 import com.langpath.sql.model.enums.Language;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -14,4 +15,6 @@ import java.util.Collection;
 public interface WordRepository extends JpaRepository<Word, Long> {
 
     Collection<Word> findByLang(Language lang);
+
+
 }
