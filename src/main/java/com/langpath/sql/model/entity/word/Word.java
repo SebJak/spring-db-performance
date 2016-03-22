@@ -5,6 +5,7 @@ import com.langpath.sql.model.enums.Language;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by Sebastian on 2016-03-16.
@@ -33,4 +34,10 @@ public class Word extends BaseEntity {
     @ManyToOne(cascade = CascadeType.MERGE )
     @JoinColumn(name = "wordGroupId")
     private WordGroup wordGroup;
+
+    private long wrongAnswers;
+
+    private long goodAnswers;
+
+    private Date lastTraining;
 }

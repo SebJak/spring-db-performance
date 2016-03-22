@@ -26,7 +26,7 @@ public class FileReaderUtil {
     private WordGroupService wordGroupService;
 
     @Autowired
-    public FileReaderUtil(@Value("${words.fileName}") String fileName) {
+    public FileReaderUtil(@Value("${words.fileName}") final String fileName) {
         this.FILE_PATH = Paths.get(fileName);
     }
 
@@ -34,7 +34,7 @@ public class FileReaderUtil {
         assert FILE_PATH != null : "The FILE_PATH is null, You need to initialize FileReaderUtil.";
         List<String> lines = new ArrayList<>();
         try {
-            Files.lines(FILE_PATH).limit(count).forEach(line -> lines.add(line));
+            Files.lines(FILE_PATH).limit(count).forEach(lines::add);
         } catch (IOException e) {
             e.printStackTrace();
         }

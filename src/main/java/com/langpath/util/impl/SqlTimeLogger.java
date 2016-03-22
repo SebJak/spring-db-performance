@@ -13,7 +13,7 @@ import java.nio.charset.Charset;
 /**
  * Created by sjakowski on 2016-03-21.
  */
-@Service
+@Service("sqlTimeLogger")
 public class SqlTimeLogger implements TimeLogger {
 
     private static final Logger logger = LoggerFactory.getLogger(SqlTimeLogger.class);
@@ -38,6 +38,7 @@ public class SqlTimeLogger implements TimeLogger {
 
     }
 
+    @Override
     public void start() {
         start = System.currentTimeMillis();
     }

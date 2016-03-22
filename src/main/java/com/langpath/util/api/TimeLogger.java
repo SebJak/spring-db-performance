@@ -10,12 +10,14 @@ public interface TimeLogger {
     default StringBuilder prepareLog(final String method, final int count, final long time) {
         StringBuilder value = new StringBuilder();
         value.append(method);
-        value.append(" ");
+        value.append(", ");
         value.append(count);
-        value.append(" ");
+        value.append(", ");
         value.append(time);
         value.append("\n");
         return value;
     }
+
+    void start();
 
 }

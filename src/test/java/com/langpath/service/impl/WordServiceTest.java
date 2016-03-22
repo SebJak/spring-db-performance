@@ -22,8 +22,6 @@ import java.util.Optional;
 @SpringApplicationConfiguration(Application.class)
 public class WordServiceTest {
 
-    private static final String FILE_NAME = "E:\\Workspace\\workspace_JaVa\\_mgr\\spring-sql-performance\\src\\test\\resources\\com.langpath.service.impl\\words.txt";
-
     @Autowired
     private WordService wordService;
 
@@ -37,36 +35,55 @@ public class WordServiceTest {
 
     @Test
     public void testSaveOneCouple() {
-        for(int i=0;i<100;i++) {
-            Collection<Word> wordsCouple = utils.readWords(1);
-            Optional<Collection<Word>> savedWords = wordService.save(wordsCouple);
-            assertEquals("Should be present", true, savedWords.isPresent());
-            savedWords.ifPresent(words -> assertEquals(2, words.size()));
-        }
+        Optional<Collection<Word>> savedWords = saveWords(1);
+        savedWords.ifPresent(words -> assertEquals(2, words.size()));
     }
 
     @Test
     public void testUpdate() throws Exception {
+        String updateValue = "updated value";
+        //First we need to save:
+        Optional<Collection<Word>> savedWords = saveWords(1);
+
+        //Then we can update.
+        Collection<Word> wordsToUpdate = savedWords.get();
+        wordsToUpdate.forEach(word -> word.setValue(updateValue));
+        wordsToUpdate.forEach(word -> assertEquals("Should value be updated", updateValue ,wordService.update(word)));
 
     }
 
     @Test
     public void testFindById() throws Exception {
-
+        Collection<Word> savedWords = saveWords(1).get();
+        savedWords.forEach(word -> assertEquals("Should value be present", true ,wordService.findById(word.getId())));
     }
 
     @Test
     public void testFindAll() throws Exception {
-
+        wordService.findAll();
     }
 
     @Test
     public void testRemove() throws Exception {
-
+        Collection<Word> savedWords = saveWords(1).get();
+        savedWords.forEach(word -> assertEquals("Should be removed", Boolean.TRUE ,wordService.remove(word)));
     }
 
     @Test
     public void testFindByLang() throws Exception {
+        Collection<Word> savedWords = saveWords(1).get();
+        savedWords.forEach(word -> assertEquals("Should be present", true, wordService.findByLang(word.getLang()).isPresent()));
+    }
 
+    private Collection<Word> getWords(int count) {
+        Collection<Word> words = utils.readWords(count);
+        return words;
+    }
+
+    private Optional<Collection<Word>> saveWords(int count) {
+        Collection<Word> wordsCouple = getWords(count);
+        Optional<Collection<Word>> savedWords = wordService.save(wordsCouple);
+        assertEquals("Should be present", true, savedWords.isPresent());
+        return savedWords;
     }
 }
