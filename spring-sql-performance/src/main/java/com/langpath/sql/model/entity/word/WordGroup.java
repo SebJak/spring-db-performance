@@ -31,7 +31,7 @@ public class WordGroup extends BaseEntity {
     @JoinColumn(name = "ownerId")
     private User owner;
 
-    @ManyToMany(mappedBy = "wordGroups")
+    @ManyToMany(mappedBy = "wordGroups", fetch = FetchType.LAZY)
     private Set<User> users;
 
     @Enumerated(EnumType.STRING)

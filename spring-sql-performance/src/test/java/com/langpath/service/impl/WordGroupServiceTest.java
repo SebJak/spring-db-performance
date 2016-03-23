@@ -1,14 +1,14 @@
 package com.langpath.service.impl;
 
 import com.langpath.Application;
-import com.langpath.sql.model.helps.WordGroupAggregation;
+import com.langpath.sql.model.helps.AggregationWordGroup;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.*;
+import java.util.Collection;
 
 /**
  * Created by Sebastian on 2016-03-18.
@@ -82,7 +82,7 @@ public class WordGroupServiceTest {
 
     @Test
     public void testGetAggregationWordGroup() throws Exception {
-        WordGroupAggregation wg = service.getAggregationWordGroup();
+        Collection<AggregationWordGroup> wg = service.getAggregationWordGroup();
         System.out.println(wg);
     }
 }

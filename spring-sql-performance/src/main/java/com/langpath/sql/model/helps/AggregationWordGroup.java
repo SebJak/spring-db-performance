@@ -8,7 +8,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-public class WordGroupAggregation {
+public class AggregationWordGroup {
 
     private String name;
 
