@@ -1,8 +1,7 @@
 package com.langpath.service.api;
 
-
 import com.langpath.data.model.entity.word.WordGroup;
-import com.langpath.data.model.helps.AggregationWordGroup;
+import com.langpath.sql.model.helps.AggregationWordGroup;
 
 import java.util.Collection;
 
