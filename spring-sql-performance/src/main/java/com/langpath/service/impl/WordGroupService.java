@@ -1,8 +1,11 @@
 package com.langpath.service.impl;
 
+import com.langpath.data.model.entity.word.WordGroup;
+import com.langpath.data.model.helps.AggregationWordGroup;
+import com.langpath.data.repositories.WordGroupRepository;
+
 import com.langpath.service.api.WordGroupServiceApi;
-import com.langpath.sql.model.entity.word.WordGroup;
-import com.langpath.sql.repositories.WordGroupRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

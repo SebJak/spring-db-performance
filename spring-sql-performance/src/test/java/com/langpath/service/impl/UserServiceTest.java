@@ -1,9 +1,9 @@
 package com.langpath.service.impl;
 
 import com.langpath.Application;
+import com.langpath.data.model.entity.user.User;
 import com.langpath.exceptions.FailLoginException;
 import com.langpath.exceptions.FailLogoutException;
-import com.langpath.sql.model.entity.user.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
