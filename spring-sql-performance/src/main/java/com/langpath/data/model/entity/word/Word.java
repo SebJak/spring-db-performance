@@ -35,6 +35,7 @@ public class Word extends BaseEntity {
     @JoinColumn(name = "wordGroupId")
     private WordGroup wordGroup;
 
+    @Column()
     private long wrongAnswers;
 
     private long goodAnswers;

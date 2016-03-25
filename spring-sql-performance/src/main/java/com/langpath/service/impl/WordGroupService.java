@@ -1,9 +1,9 @@
 package com.langpath.service.impl;
 
-import com.langpath.service.api.WordGroupServiceApi;
 import com.langpath.data.model.entity.word.WordGroup;
-import com.langpath.data.model.helps.WordGroupAggregation;
 import com.langpath.data.repositories.WordGroupRepository;
+import com.langpath.service.api.WordGroupServiceApi;
+import com.langpath.data.model.helps.AggregationWordGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,7 +59,7 @@ public class WordGroupService implements WordGroupServiceApi{
     }
 
     @Override
-    public WordGroupAggregation getAggregationWordGroup() {
+    public Collection<AggregationWordGroup> getAggregationWordGroup() {
        return repository.getAggregation();
     }
 }

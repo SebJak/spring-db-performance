@@ -1,7 +1,7 @@
 package com.langpath.data.repositories;
 
 import com.langpath.data.model.entity.word.WordGroup;
-import com.langpath.data.model.helps.WordGroupAggregation;
+import com.langpath.data.model.helps.AggregationWordGroup;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -15,5 +15,5 @@ import java.util.Collection;
 public interface WordGroupRepository extends JpaRepository<WordGroup,Long> {
 
     @Query(value = "SELECT new com.langpath.data.model.helps.WordGroupAggregation(wg.name, COUNT(*)) from WordGroup as wg, Word as w where wg = w.wordGroup group by wg.name")
-    Collection<WordGroupAggregation> getAggregation();
+    Collection<AggregationWordGroup> getAggregation();
 }

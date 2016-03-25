@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Collection;
@@ -63,10 +64,16 @@ public class WordServiceTest {
         wordService.findAll();
     }
 
-    @Test
+    @Test(expected = DataIntegrityViolationException.class)
     public void testRemove() throws Exception {
         Collection<Word> savedWords = saveWords(1).get();
-        savedWords.forEach(word -> assertEquals("Should be removed", Boolean.TRUE ,wordService.remove(word)));
+        savedWords.forEach(word -> assertEquals("Should not remove because foreign key", Boolean.TRUE, wordService.remove(word)));
+    }
+
+    @Test
+    public void testRemoveOne() throws Exception {
+        Collection<Word> savedWords = saveWords(1).get();
+        savedWords.stream().filter(word-> word.getSource() == null).limit(1).forEach(word -> assertEquals("Should be removed", Boolean.TRUE ,wordService.remove(word)));
     }
 
     @Test

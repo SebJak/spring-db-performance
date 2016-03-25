@@ -1,17 +1,13 @@
 group 'data.base.performance'
 version '1.0-SNAPSHOT'
 
-allprojects {
+repositories {
+    mavenCentral()
+}
 
+allprojects {
     apply plugin: 'java'
     apply plugin: 'findbugs'
-
-    sourceCompatibility = 1.8
-
-    repositories {
-        mavenCentral()
-    }
-
 
     dependencies {
         //Spring
@@ -25,9 +21,18 @@ allprojects {
         testCompile 'junit:junit:4.12'
     }
 
+    tasks.withType(FindBugs) {
+        reports {
+            xml.enabled = false
+            html.enabled = true
+        }
+    }
+
     findbugs {
         ignoreFailures = true
         reportsDir = file("$project.buildDir/findbugsReports")
     }
 }
+
+
 
