@@ -1,7 +1,7 @@
 package com.langpath.service.api;
 
-import com.langpath.sql.model.entity.word.Word;
-import com.langpath.sql.model.enums.Language;
+import com.langpath.data.model.entity.word.Word;
+import com.langpath.data.model.enums.Language;
 
 import java.util.Collection;
 import java.util.Optional;

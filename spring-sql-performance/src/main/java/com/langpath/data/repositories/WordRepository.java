@@ -1,9 +1,8 @@
-package com.langpath.sql.repositories;
+package com.langpath.data.repositories;
 
-import com.langpath.sql.model.entity.word.Word;
-import com.langpath.sql.model.enums.Language;
+import com.langpath.data.model.entity.word.Word;
+import com.langpath.data.model.enums.Language;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;

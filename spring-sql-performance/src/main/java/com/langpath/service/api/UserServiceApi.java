@@ -1,6 +1,6 @@
 package com.langpath.service.api;
 
-import com.langpath.sql.model.entity.user.User;
+import com.langpath.data.model.entity.user.User;
 
 import java.util.Optional;
 

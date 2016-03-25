@@ -1,4 +1,4 @@
-package com.langpath.sql.persistance;
+package com.langpath.data.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +21,7 @@ import java.util.Properties;
  * Created by Sebastian on 2016-03-14.
  */
 @Configuration
-@EnableJpaRepositories(basePackages = "com.langpath.sql.repositories")
+@EnableJpaRepositories(basePackages = "com.langpath.data.repositories")
 @EnableTransactionManagement
 public class PersistenceConf {
 

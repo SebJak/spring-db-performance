@@ -1,4 +1,4 @@
-package com.langpath.sql.model.entity.base;
+package com.langpath.data.model.entity.base;
 
 import lombok.AccessLevel;
 import lombok.Data;

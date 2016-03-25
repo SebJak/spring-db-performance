@@ -1,18 +1,16 @@
 package com.langpath.service.impl;
 
 import com.langpath.service.api.WordServiceApi;
-import com.langpath.sql.model.entity.word.Word;
-import com.langpath.sql.model.enums.Language;
-import com.langpath.sql.repositories.WordRepository;
+import com.langpath.data.model.entity.word.Word;
+import com.langpath.data.model.enums.Language;
+import com.langpath.data.repositories.WordRepository;
 import com.langpath.util.api.TimeLogger;
 import com.langpath.util.enums.Count;
-import com.langpath.util.impl.SqlTimeLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 /**

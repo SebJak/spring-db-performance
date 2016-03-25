@@ -3,7 +3,7 @@ package com.langpath.service.impl;
 import static org.junit.Assert.*;
 
 import com.langpath.Application;
-import com.langpath.sql.model.entity.word.Word;
+import com.langpath.data.model.entity.word.Word;
 import com.langpath.util.FileReaderUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;

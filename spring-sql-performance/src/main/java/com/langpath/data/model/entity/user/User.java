@@ -1,7 +1,7 @@
-package com.langpath.sql.model.entity.user;
+package com.langpath.data.model.entity.user;
 
-import com.langpath.sql.model.entity.base.BaseEntity;
-import com.langpath.sql.model.entity.word.WordGroup;
+import com.langpath.data.model.entity.base.BaseEntity;
+import com.langpath.data.model.entity.word.WordGroup;
 import lombok.*;
 
 import javax.persistence.*;

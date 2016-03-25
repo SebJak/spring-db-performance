@@ -1,6 +1,6 @@
-package com.langpath.sql.repositories;
+package com.langpath.data.repositories;
 
-import com.langpath.sql.model.entity.user.User;
+import com.langpath.data.model.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

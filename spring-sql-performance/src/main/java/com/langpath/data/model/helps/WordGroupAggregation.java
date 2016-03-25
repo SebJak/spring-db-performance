@@ -1,4 +1,4 @@
-package com.langpath.sql.model.helps;
+package com.langpath.data.model.helps;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

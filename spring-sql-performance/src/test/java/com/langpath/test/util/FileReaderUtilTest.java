@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class FileReaderUtilTest {
 
     private static FileReaderUtil utils;
-    private static final String FILE_NAME = "E:\\Workspace\\workspace_JaVa\\_mgr\\spring-sql-performance\\src\\test\\resources\\com.langpath.service.impl\\words.txt";
+    private static final String FILE_NAME = "E:\\Workspace\\workspace_JaVa\\_mgr\\spring-data-performance\\src\\test\\resources\\com.langpath.service.impl\\words.txt";
 
     @Test(expected = NullPointerException.class)
     public void testAssertion() {

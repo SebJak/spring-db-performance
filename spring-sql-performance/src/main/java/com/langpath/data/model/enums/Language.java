@@ -1,4 +1,4 @@
-package com.langpath.sql.model.enums;
+package com.langpath.data.model.enums;
 
 /**
  * Created by Sebastian on 2016-03-16.
