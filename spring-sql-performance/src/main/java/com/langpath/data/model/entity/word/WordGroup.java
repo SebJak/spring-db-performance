@@ -22,8 +22,7 @@ import java.util.Set;
 public class WordGroup extends BaseEntity {
 
     @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
-    static long serialVersionUID = 1l;
+    final static long serialVersionUID = 1l;
 
     private String name;
 

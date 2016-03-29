@@ -18,8 +18,7 @@ import java.io.Serializable;
 public class BaseEntity implements Serializable {
 
     @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
-    static long serialVersionUID = 1l;
+    final static long serialVersionUID = 1l;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

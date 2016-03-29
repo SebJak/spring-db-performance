@@ -20,8 +20,7 @@ import java.util.Set;
 public class User extends BaseEntity {
 
     @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
-    static long serialVersionUID = 1l;
+    final static long serialVersionUID = 1l;
 
     private String firstName;
 

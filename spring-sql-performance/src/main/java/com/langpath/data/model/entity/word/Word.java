@@ -19,8 +19,7 @@ import java.util.Date;
 public class Word extends BaseEntity {
 
     @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
-    static long serialVersionUID = 1l;
+    final static long serialVersionUID = 1l;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "sourceId")
