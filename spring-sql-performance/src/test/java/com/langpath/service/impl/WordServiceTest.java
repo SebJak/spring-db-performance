@@ -36,7 +36,7 @@ public class WordServiceTest {
 
     @BeforeClass
     public static void init() {
-        System.out.println("Init");
+        logger.info("Init");
     }
 
     @Test
