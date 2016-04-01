@@ -23,8 +23,8 @@ public class WordGroupService implements WordGroupServiceApi{
     private WordGroupRepository repository;
 
     @Override
-    public Optional<WordGroup> save(WordGroup word) {
-        return null;
+    public Optional<WordGroup> save(WordGroup wordGroup) {
+        return Optional.of(repository.save(wordGroup));
     }
 
     @Override

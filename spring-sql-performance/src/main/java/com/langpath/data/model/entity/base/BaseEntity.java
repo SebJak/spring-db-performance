@@ -13,7 +13,8 @@ import java.io.Serializable;
  *
  * Base entity. Keeps only common values.
  */
-@Data
+@Setter
+@Getter
 @MappedSuperclass
 public class BaseEntity implements Serializable {
 
@@ -24,4 +25,27 @@ public class BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
+
+    @Override
+    public String toString() {
+        return "BaseEntity{" +
+                "id=" + id +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BaseEntity that = (BaseEntity) o;
+
+        return id != null ? id.equals(that.id) : that.id == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
 }

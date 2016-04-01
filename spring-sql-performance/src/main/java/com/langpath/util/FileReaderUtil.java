@@ -53,6 +53,7 @@ public class FileReaderUtil {
             wordGroup = new WordGroup();
             wordGroup.setName("Word Group");
             wordGroup.setSourceLang(Language.PL);
+            wordGroupService.save(wordGroup);
         }
         List<String> stringWords = readLines(count);
 

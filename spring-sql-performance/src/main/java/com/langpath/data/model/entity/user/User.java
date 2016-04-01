@@ -13,8 +13,8 @@ import java.util.Set;
  * The entity represents User details.
  */
 
-@Data
-@EqualsAndHashCode(callSuper=true)
+@Setter
+@Getter
 @Entity
 @Table(name="USERS")
 public class User extends BaseEntity {
@@ -38,6 +38,25 @@ public class User extends BaseEntity {
             joinColumns=@JoinColumn(name="USER_ID", referencedColumnName="ID"),
             inverseJoinColumns=@JoinColumn(name="WORD_GROUP_ID", referencedColumnName="ID"))
     private Set<WordGroup> wordGroups;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        User user = (User) o;
+
+        return login.equals(user.login);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + login.hashCode();
+        return result;
+    }
 
     //TODO
     /*

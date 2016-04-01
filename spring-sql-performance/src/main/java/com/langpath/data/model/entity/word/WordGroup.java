@@ -15,8 +15,8 @@ import java.util.Set;
  * The entity represents WordGroup detials.
  */
 
-@Data
-@EqualsAndHashCode(callSuper = true, exclude={"users"})
+@Setter
+@Getter
 @Entity
 @Table(name="WORD_GROUP")
 public class WordGroup extends BaseEntity {
@@ -43,4 +43,25 @@ public class WordGroup extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ValidationState validation;
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        WordGroup wordGroup = (WordGroup) o;
+
+        if (!name.equals(wordGroup.name)) return false;
+        return owner.equals(wordGroup.owner);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + owner.hashCode();
+        return result;
+    }
 }

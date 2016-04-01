@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Collection;
@@ -24,6 +25,7 @@ import java.util.Optional;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(Application.class)
+@ActiveProfiles(value = "test")
 public class WordServiceTest {
 
     private static final Logger logger = LoggerFactory.getLogger(WordServiceTest.class);
@@ -79,7 +81,13 @@ public class WordServiceTest {
     @Test //??????
     public void testRemoveOne() throws Exception {
         Collection<Word> savedWords = saveWords(1).get(); //assertEquals("Should be removed", Boolean.TRUE, wordService.remove(word))
-        savedWords.stream().filter(word1 -> savedWords.stream().filter(word2 -> !word1.equals(word2.getSource())).count() > 0).limit(1).forEach(word -> logger.debug("ID:" +word.getId().toString()));
+        savedWords.stream().filter(word1 -> {
+            logger.info(word1.toString());
+            return savedWords.stream().filter(word2 -> {
+                logger.info(word2.toString());
+                return !word1.equals(word2.getSource());
+            }).count() > 0;
+        }).limit(1).forEach(word -> logger.debug("ID:" +word.getId().toString()));
     }
 
     @Test

@@ -14,6 +14,8 @@ import java.util.Optional;
  */
 public class SecurityUserService implements SecurityUserApi {
 
+    //http://stackoverflow.com/questions/10826293/restful-authentication-via-spring
+
     @Autowired
     private UserRepository repository;
 

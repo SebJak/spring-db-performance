@@ -2,16 +2,12 @@ package com.langpath.service.impl;
 
 import com.langpath.Application;
 import com.langpath.data.model.entity.user.User;
-import com.langpath.exceptions.FailLoginException;
-import com.langpath.exceptions.FailLogoutException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.Optional;
 
 /**
  * Created by Sebastian on 2016-03-18.
