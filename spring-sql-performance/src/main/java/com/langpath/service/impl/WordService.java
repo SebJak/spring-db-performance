@@ -9,6 +9,7 @@ import com.langpath.util.enums.Count;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -46,6 +47,7 @@ public class WordService implements WordServiceApi {
         return saved;
     }
 
+    @Transactional
     @Override
     public Optional<Word> update(Word word) {
         final String methodName = "UPDATE";
