@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Optional;
@@ -17,6 +18,7 @@ import java.util.Optional;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(Application.class)
+@ActiveProfiles(value = "test")
 public class UserServiceTest {
 
     @Autowired
@@ -27,17 +29,17 @@ public class UserServiceTest {
         userService.login("login", "password");
     }
 
-    @Test(expected = FailLoginException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testNullLogin() throws Exception {
         userService.login(null, null);
     }
 
-    @Test(expected = FailLoginException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testNullNameLogin() throws Exception {
         userService.login(null, "pass");
     }
 
-    @Test(expected = FailLoginException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testNullPassLogin() throws Exception {
         userService.login("login", null);
     }

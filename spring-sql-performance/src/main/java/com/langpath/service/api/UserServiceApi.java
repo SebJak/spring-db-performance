@@ -1,15 +1,14 @@
 package com.langpath.service.api;
 
 import com.langpath.data.model.entity.user.User;
-
-import java.util.Optional;
+import com.langpath.exceptions.FailLoginException;
 
 /**
  * Created by sjakowski on 2016-03-16.
  */
 public interface UserServiceApi extends CommonApi<User, Long>{
 
-    Optional<User> login(String login, String password);
+    User login(String login, String password) throws FailLoginException;
 
     Boolean logout(User user);
 }
