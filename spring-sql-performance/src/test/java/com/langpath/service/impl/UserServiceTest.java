@@ -24,50 +24,6 @@ public class UserServiceTest {
     @Autowired
     private UserService userService;
 
-    @Test(expected = FailLoginException.class)
-    public void testWrongCredentialLogin(){
-        userService.login("login", "password");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testNullLogin() throws Exception {
-        userService.login(null, null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testNullNameLogin() throws Exception {
-        userService.login(null, "pass");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testNullPassLogin() throws Exception {
-        userService.login("login", null);
-    }
-
-    @Test
-    public void testSecondLoginLogin() throws Exception {
-        userService.login("login", "password");
-        userService.login("login", "password");
-        //Need add check action on second user;
-    }
-
-    @Test
-    public void testLogout() throws Exception {
-        Optional<User> user = userService.login("correctLogin", "correctPass");
-        userService.logout(user.get());
-    }
-
-    @Test(expected = FailLogoutException.class)
-    public void testLogoutNoLoggedUser() throws Exception {
-        User user = new User();
-        userService.logout(user);
-    }
-
-    @Test(expected = FailLogoutException.class)
-    public void testLogoutNullUser() throws Exception {
-        userService.logout(null);
-    }
-
     @Test
     public void testSave() throws Exception {
         User user = new User();

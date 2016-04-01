@@ -8,7 +8,5 @@ import com.langpath.exceptions.FailLoginException;
  */
 public interface UserServiceApi extends CommonApi<User, Long>{
 
-    User login(String login, String password) throws FailLoginException;
 
-    Boolean logout(User user);
 }
