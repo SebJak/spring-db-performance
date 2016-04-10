@@ -1,4 +1,4 @@
-package com.langpath.data.configuration;
+package com.langpath.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

@@ -1,0 +1,77 @@
+package com.langpath.service.impl.performance;
+
+import com.langpath.data.model.entity.user.User;
+import com.langpath.service.api.UserServiceApi;
+import com.langpath.service.api.performance.CheckPerformanceApi;
+import com.langpath.util.api.EntityFactoryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Created by Sebastian on 2016-04-03.
+ */
+@Service("userSqlPerformance")
+public class UserSqlPerformacne implements CheckPerformanceApi<User> {
+
+    @Autowired
+    private UserServiceApi userService;
+
+    @Qualifier("userBuilder")
+    @Autowired
+    private EntityFactoryBuilder userBuilder;
+
+
+    @Override
+    public User saveOne() {
+        List<User> userList = new ArrayList<>(userBuilder.build(1));
+        return userList.get(0);
+    }
+
+    @Override
+    public Collection<User> saveCollection(){
+       Collection<User> users = userBuilder.build(100);
+        return users;
+    }
+
+    @Override
+    public User update(){
+        return update(100);
+    }
+
+    private User update(int times) {
+        List<User> users = new ArrayList<>(userBuilder.build(1));
+        for(int i=0;i<times;i++)
+            users.forEach(u -> userService.update(u));
+        return  users.get(0);
+    }
+
+    @Override
+    public User remove() {
+        List<User> users = new ArrayList<>(userBuilder.build(1));
+        users.forEach(u -> userService.remove(u));
+        return  users.get(0);
+    }
+
+    @Override
+    public User findById() {
+        List<User> users = new ArrayList<>(userBuilder.build(100));
+        users.forEach(u -> userService.findById(u.getId()));
+        return  users.get(0);
+    }
+
+    @Override
+    public Optional<Collection<User>> findByIds() {
+        Collection<User> users = userBuilder.build(100);
+        Collection<Long> ids = new ArrayList<>();
+        users.forEach(c -> ids.add(c.getId()));
+        //users.forEach(u -> u.getId(; how to collect all ids for objects using stream.
+        return userService.findByIds(ids);
+    }
+
+}

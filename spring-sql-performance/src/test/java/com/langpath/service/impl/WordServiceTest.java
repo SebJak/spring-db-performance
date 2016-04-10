@@ -78,16 +78,9 @@ public class WordServiceTest {
         savedWords.forEach(word -> assertEquals("Should not remove because foreign key", Boolean.TRUE, wordService.remove(word)));
     }
 
-    @Test //??????
+   // @Test //??????
     public void testRemoveOne() throws Exception {
         Collection<Word> savedWords = saveWords(1).get(); //assertEquals("Should be removed", Boolean.TRUE, wordService.remove(word))
-        savedWords.stream().filter(word1 -> {
-            logger.info(word1.toString());
-            return savedWords.stream().filter(word2 -> {
-                logger.info(word2.toString());
-                return !word1.equals(word2.getSource());
-            }).count() > 0;
-        }).limit(1).forEach(word -> logger.debug("ID:" +word.getId().toString()));
     }
 
     @Test

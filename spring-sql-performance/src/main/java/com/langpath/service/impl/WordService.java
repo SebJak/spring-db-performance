@@ -6,6 +6,8 @@ import com.langpath.data.model.enums.Language;
 import com.langpath.data.repositories.WordRepository;
 import com.langpath.util.api.TimeLogger;
 import com.langpath.util.enums.Count;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ import java.util.Optional;
  */
 @Service
 public class WordService implements WordServiceApi {
+
+    private static final Logger logger = LoggerFactory.getLogger(WordService.class);
 
     @Autowired
     private WordRepository repository;
@@ -82,6 +86,11 @@ public class WordService implements WordServiceApi {
         repository.delete(word);
         timeLogger.logTime(methodName, Count.ONE.getCount());
         return Boolean.TRUE;
+    }
+
+    @Override
+    public Optional<Collection<Word>> findByIds(Collection<Long> ids) {
+        return null;
     }
 
     @Override

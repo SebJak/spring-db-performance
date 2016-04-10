@@ -52,8 +52,8 @@ public class WordGroup extends BaseEntity {
 
         WordGroup wordGroup = (WordGroup) o;
 
-        if (!name.equals(wordGroup.name)) return false;
-        return owner.equals(wordGroup.owner);
+        return name.equals(wordGroup.name);
+//         owner.equals(wordGroup.owner);
 
     }
 
@@ -61,7 +61,7 @@ public class WordGroup extends BaseEntity {
     public int hashCode() {
         int result = super.hashCode();
         result = 31 * result + name.hashCode();
-        result = 31 * result + owner.hashCode();
+//        result = 31 * result + owner.hashCode();
         return result;
     }
 }

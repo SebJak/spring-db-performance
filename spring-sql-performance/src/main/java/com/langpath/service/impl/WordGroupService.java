@@ -6,7 +6,12 @@ import com.langpath.data.repositories.WordGroupRepository;
 
 import com.langpath.service.api.WordGroupServiceApi;
 
+import com.langpath.util.api.TimeLogger;
+import com.langpath.util.enums.Count;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -19,36 +24,82 @@ import java.util.Optional;
 @Service
 public class WordGroupService implements WordGroupServiceApi{
 
+    private static final Logger logger = LoggerFactory.getLogger(WordGroupService.class);
+
     @Autowired
     private WordGroupRepository repository;
 
+    @Autowired
+    @Qualifier("sqlTimeLogger")
+    private TimeLogger timeLogger;
+
     @Override
     public Optional<WordGroup> save(WordGroup wordGroup) {
-        return Optional.of(repository.save(wordGroup));
+        final String method = "SAVE";
+        timeLogger.start();
+        Optional<WordGroup> saved = Optional.of(repository.save(wordGroup));
+        if(saved.isPresent()){
+            timeLogger.logTime(method, Count.ONE.getCount());
+        }
+        return saved;
     }
 
     @Override
-    public Optional<Collection<WordGroup>> save(Iterable<WordGroup> word) {
-        return null;
+    public Optional<Collection<WordGroup>> save(Iterable<WordGroup> wordGroup) {
+        final String method = "SAVE";
+        timeLogger.start();
+        Optional<Collection<WordGroup>> saved = Optional.of(repository.save(wordGroup));
+        if(saved.isPresent()){
+            timeLogger.logTime(method, saved.get().size());
+        }
+        return saved;
     }
 
     @Override
-    public Optional<WordGroup> update(WordGroup word) {
-        return null;
+    public Optional<WordGroup> update(WordGroup wordGroup) {
+        final String method = "UPDATE";
+        timeLogger.start();
+        Optional<WordGroup> updated = Optional.of(repository.save(wordGroup));
+        if(updated.isPresent()){
+            timeLogger.logTime(method, Count.ONE.getCount());
+        }
+        return updated;
     }
 
     @Override
     public Optional<WordGroup> findById(Long id) {
-        return null;
+        final String method = "SELECT_BY_ID";
+        timeLogger.start();
+        Optional<WordGroup> found = Optional.of(repository.findOne(id));
+        if(found.isPresent()){
+            timeLogger.logTime(method, Count.ONE.getCount());
+        }
+        return found;
+
     }
 
     @Override
     public Optional<Collection<WordGroup>> findAll() {
-        return null;
+        final String method = "SELECT_ALL";
+        timeLogger.start();
+        Optional<Collection<WordGroup>> found = Optional.of(repository.findAll());
+        if(found.isPresent()){
+            timeLogger.logTime(method, found.get().size());
+        }
+        return found;
     }
 
     @Override
-    public Boolean remove(WordGroup word) {
+    public Boolean remove(WordGroup wordGroup) {
+        final String method = "SELECT_BY_ID";
+        timeLogger.start();
+        repository.delete(wordGroup);
+        timeLogger.logTime(method, Count.ONE.getCount());
+        return Boolean.TRUE;
+    }
+
+    @Override
+    public Optional<Collection<WordGroup>> findByIds(Collection<Long> ids) {
         return null;
     }
 
@@ -62,6 +113,10 @@ public class WordGroupService implements WordGroupServiceApi{
 
     @Override
     public Collection<AggregationWordGroup> getAggregationWordGroup() {
-       return repository.getAggregation();
+        final String method = "AGGREGATION_1";
+        timeLogger.start();
+        Collection<AggregationWordGroup> results = repository.getAggregation();
+        timeLogger.logTime(method,results.size());
+        return results;
     }
 }

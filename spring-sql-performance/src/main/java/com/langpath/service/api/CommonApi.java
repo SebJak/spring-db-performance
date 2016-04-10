@@ -22,4 +22,5 @@ public interface CommonApi<K extends BaseEntity,T> {
 
     Boolean remove(K entity);
 
+    Optional<Collection<K>> findByIds(Collection<Long> ids);
 }
