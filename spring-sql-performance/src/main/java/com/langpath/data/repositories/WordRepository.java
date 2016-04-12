@@ -1,7 +1,7 @@
 package com.langpath.data.repositories;
 
 import com.langpath.data.model.entity.word.Word;
-import com.langpath.data.model.enums.Language;
+import common.model.enums.Language;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

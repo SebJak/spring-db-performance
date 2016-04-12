@@ -3,7 +3,7 @@ package com.langpath.service.impl;
 import static org.junit.Assert.*;
 
 import com.langpath.data.model.entity.base.BaseEntity;
-import com.langpath.service.api.CommonApi;
+import com.common.service.api.CrudApi;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,7 +12,7 @@ import java.util.Optional;
 /**
  * Created by sjakowski on 2016-03-30.
  */
-public abstract class GenericCrudTests<T extends BaseEntity, E extends CommonApi> {
+public abstract class GenericCrudTests<T extends BaseEntity, E extends CrudApi> {
 
     @Autowired
     private E service;

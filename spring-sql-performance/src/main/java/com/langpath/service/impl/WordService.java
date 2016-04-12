@@ -2,7 +2,7 @@ package com.langpath.service.impl;
 
 import com.langpath.service.api.WordServiceApi;
 import com.langpath.data.model.entity.word.Word;
-import com.langpath.data.model.enums.Language;
+import common.model.enums.Language;
 import com.langpath.data.repositories.WordRepository;
 import com.langpath.util.api.TimeLogger;
 import com.langpath.util.enums.Count;

@@ -1,8 +1,8 @@
 package com.langpath.util.impl;
 
 import com.langpath.data.model.entity.word.WordGroup;
-import com.langpath.data.model.enums.Language;
-import com.langpath.data.model.enums.ValidationState;
+import common.model.enums.Language;
+import common.model.enums.ValidationState;
 import com.langpath.service.api.WordGroupServiceApi;
 import com.langpath.util.api.EntityFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,8 +2,8 @@ package com.langpath.data.model.entity.word;
 
 import com.langpath.data.model.entity.base.BaseEntity;
 import com.langpath.data.model.entity.user.User;
-import com.langpath.data.model.enums.Language;
-import com.langpath.data.model.enums.ValidationState;
+import common.model.enums.Language;
+import common.model.enums.ValidationState;
 import lombok.*;
 
 import javax.persistence.*;

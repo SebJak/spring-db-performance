@@ -4,7 +4,10 @@ import org.neo4j.ogm.session.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.env.Environment;
 import org.springframework.data.neo4j.config.Neo4jConfiguration;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
@@ -28,6 +31,7 @@ public class Neo4jAppConfiguration extends Neo4jConfiguration {
 
     private static final Logger logger = LoggerFactory.getLogger(Neo4jAppConfiguration.class);
 
+    @Bean
     public Neo4jServer neo4jServer() {
         logger.info("Initialize neo4j Server.");
         final String url = env.getRequiredProperty("neo4j.server.url");
@@ -37,7 +41,8 @@ public class Neo4jAppConfiguration extends Neo4jConfiguration {
         return server;
     }
 
-    @Override
+    @Bean
+    @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
     public SessionFactory getSessionFactory() {
         logger.info("Session factory.");
         return new SessionFactory("com.langpath.neo4j");

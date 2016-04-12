@@ -1,6 +1,4 @@
-package com.langpath.service.api;
-
-import com.langpath.data.model.entity.base.BaseEntity;
+package com.common.service.api;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -8,7 +6,7 @@ import java.util.Optional;
 /**
  * Created by Sebastian on 2016-03-18.
  */
-public interface CommonApi<K extends BaseEntity,T> {
+public interface CrudApi<K,T> {
 
     Optional<K> save(K entity);
 

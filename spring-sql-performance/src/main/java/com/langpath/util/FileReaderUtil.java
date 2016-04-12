@@ -3,7 +3,7 @@ package com.langpath.util;
 import com.langpath.service.impl.WordGroupService;
 import com.langpath.data.model.entity.word.Word;
 import com.langpath.data.model.entity.word.WordGroup;
-import com.langpath.data.model.enums.Language;
+import common.model.enums.Language;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

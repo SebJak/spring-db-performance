@@ -1,5 +1,6 @@
 package com.langpath.neo4j.model;
 
+import common.model.enums.Language;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,14 +9,15 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 /**
- * Created by Sebastian on 2016-04-10.
+ * Created by Sebastian on 2016-04-12.
  */
+@NodeEntity
 @Getter
 @Setter
-@NodeEntity(label = "Person")
-public class User implements Serializable {
+public class Word implements Serializable {
 
     @Getter(AccessLevel.NONE)
     final static long serialVersionUID = 1l;
@@ -23,17 +25,15 @@ public class User implements Serializable {
     @GraphId
     private Long id;
 
-    private String firstName;
+    //@EnumString(Language.class)
+    private Language language;
 
-    private String lastName;
+    private String value;
 
-    private String login; //TODO add unique
+    private long goodAnswers;
 
-    private String password;
+    private long badAnswers;
 
-    private String email; //TODO add validator
-
-    @Relationship(direction = Relationship.OUTGOING)
-    private Comparable<WordGroup> wordGroups;
-
+    @Relationship(direction = Relationship.UNDIRECTED)
+    private Collection<Word> meanings;
 }
