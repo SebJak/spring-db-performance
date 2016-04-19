@@ -1,18 +1,15 @@
 package com.langpath.service.impl;
 
-import com.langpath.data.model.entity.word.Word;
 import com.langpath.data.repositories.UserRepository;
-import com.langpath.exceptions.FailLoginException;
 import com.langpath.service.api.UserServiceApi;
 import com.langpath.data.model.entity.user.User;
-import com.langpath.util.api.TimeLogger;
-import com.langpath.util.enums.Count;
+import com.common.service.api.TimeLogger;
+import common.model.enums.Count;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import java.util.Collection;
 import java.util.Optional;

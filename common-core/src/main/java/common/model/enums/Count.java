@@ -1,4 +1,4 @@
-package com.langpath.util.enums;
+package common.model.enums;
 
 /**
  * Created by sjakowski on 2016-03-22.

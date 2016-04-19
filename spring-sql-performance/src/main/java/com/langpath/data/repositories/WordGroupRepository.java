@@ -1,7 +1,7 @@
 package com.langpath.data.repositories;
 
 import com.langpath.data.model.entity.word.WordGroup;
-import com.langpath.data.model.helps.AggregationWordGroup;
+import common.model.AggregationWordGroup;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

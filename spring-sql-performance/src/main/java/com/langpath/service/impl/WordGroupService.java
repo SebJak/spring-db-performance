@@ -1,13 +1,13 @@
 package com.langpath.service.impl;
 
 import com.langpath.data.model.entity.word.WordGroup;
-import com.langpath.data.model.helps.AggregationWordGroup;
+import common.model.AggregationWordGroup;
 import com.langpath.data.repositories.WordGroupRepository;
 
 import com.langpath.service.api.WordGroupServiceApi;
 
-import com.langpath.util.api.TimeLogger;
-import com.langpath.util.enums.Count;
+import com.common.service.api.TimeLogger;
+import common.model.enums.Count;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

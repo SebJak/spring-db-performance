@@ -1,4 +1,4 @@
-package com.langpath.data.model.helps;
+package common.model;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

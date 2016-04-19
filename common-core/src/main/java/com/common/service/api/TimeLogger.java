@@ -1,4 +1,4 @@
-package com.langpath.util.api;
+package com.common.service.api;
 
 /**
  * Created by sjakowski on 2016-03-21.

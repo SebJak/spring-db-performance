@@ -2,7 +2,7 @@ package com.langpath.service.api;
 
 import com.common.service.api.CrudApi;
 import com.langpath.data.model.entity.word.WordGroup;
-import com.langpath.data.model.helps.AggregationWordGroup;
+import common.model.AggregationWordGroup;
 
 import java.util.Collection;
 
