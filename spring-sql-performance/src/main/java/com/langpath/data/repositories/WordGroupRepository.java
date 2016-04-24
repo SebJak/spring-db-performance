@@ -14,6 +14,6 @@ import java.util.Collection;
 @Repository
 public interface WordGroupRepository extends JpaRepository<WordGroup,Long> {
 
-    @Query(value = "SELECT new com.langpath.data.model.helps.AggregationWordGroup(wg.name, COUNT(*)) from WordGroup as wg, Word as w where wg = w.wordGroup group by wg.name")
+    @Query(value = "SELECT new common.model.AggregationWordGroup(wg.name, COUNT(*)) from WordGroup as wg, Word as w where wg = w.wordGroup group by wg.name")
     Collection<AggregationWordGroup> getAggregation();
 }

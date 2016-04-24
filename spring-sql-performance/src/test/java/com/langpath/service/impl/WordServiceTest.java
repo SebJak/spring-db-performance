@@ -2,16 +2,17 @@ package com.langpath.service.impl;
 
 import static org.junit.Assert.*;
 
+import com.common.service.api.CrudApi;
 import com.langpath.Application;
 import com.langpath.data.model.entity.word.Word;
-import com.langpath.service.api.WordServiceApi;
-import com.langpath.util.FileReaderUtil;
+import com.langpath.service.util.FileReaderUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ActiveProfiles;
@@ -31,7 +32,8 @@ public class WordServiceTest {
     private static final Logger logger = LoggerFactory.getLogger(WordServiceTest.class);
 
     @Autowired
-    private WordServiceApi wordService;
+    @Qualifier("wordCrudService")
+    private CrudApi<Word,Long> wordService;
 
     @Autowired
     private FileReaderUtil utils;
@@ -83,12 +85,6 @@ public class WordServiceTest {
         Collection<Word> savedWords = saveWords(1).get(); //assertEquals("Should be removed", Boolean.TRUE, wordService.remove(word))
     }
 
-    @Test
-    public void testFindByLang() throws Exception {
-        Collection<Word> savedWords = saveWords(1).get();
-        savedWords.forEach(word -> assertEquals("Should be present", true, wordService.findByLang(word.getLang()).isPresent()));
-    }
-
     private Collection<Word> getWords(int count) {
         Collection<Word> words = utils.readWords(count);
         return words;
@@ -96,8 +92,8 @@ public class WordServiceTest {
 
     private Optional<Collection<Word>> saveWords(int count) {
         Collection<Word> wordsCouple = getWords(count);
-        Optional<Collection<Word>> savedWords = wordService.save(wordsCouple);
-        assertEquals("Should be present", true, savedWords.isPresent());
-        return savedWords;
+        //Optional<Collection<Word>> savedWords = wordService.save(wordsCouple);
+        //assertEquals("Should be present", true, savedWords.isPresent());
+        return null;
     }
 }

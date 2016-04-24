@@ -1,4 +1,4 @@
-package com.langpath.util;
+package com.langpath.service.util;
 
 import com.langpath.service.impl.WordGroupService;
 import com.langpath.data.model.entity.word.Word;

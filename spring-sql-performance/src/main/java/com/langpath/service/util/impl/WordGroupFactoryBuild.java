@@ -1,10 +1,10 @@
-package com.langpath.util.impl;
+package com.langpath.service.util.impl;
 
 import com.langpath.data.model.entity.word.WordGroup;
 import common.model.enums.Language;
 import common.model.enums.ValidationState;
 import com.langpath.service.api.WordGroupServiceApi;
-import com.langpath.util.api.EntityFactoryBuilder;
+import com.langpath.service.util.api.EntityFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

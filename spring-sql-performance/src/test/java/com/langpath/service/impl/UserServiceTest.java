@@ -2,6 +2,7 @@ package com.langpath.service.impl;
 
 import static org.junit.Assert.*;
 
+import com.common.service.api.CrudApi;
 import com.langpath.Application;
 import com.langpath.data.model.entity.user.User;
 import org.junit.Test;
@@ -25,7 +26,7 @@ import java.util.UUID;
 public class UserServiceTest {
 
     @Autowired
-    private UserService userService;
+    private CrudApi<User,Long> userService;
 
     @Test
     public void testSave() throws Exception {

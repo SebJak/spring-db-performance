@@ -1,9 +1,9 @@
 package com.langpath.service.impl.performance;
 
+import com.common.service.api.CrudApi;
 import com.langpath.data.model.entity.user.User;
-import com.langpath.service.api.UserServiceApi;
 import com.langpath.service.api.performance.CheckPerformanceApi;
-import com.langpath.util.api.EntityFactoryBuilder;
+import com.langpath.service.util.api.EntityFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -17,10 +17,11 @@ import java.util.Optional;
  * Created by Sebastian on 2016-04-03.
  */
 @Service("userSqlPerformance")
-public class UserSqlPerformacne implements CheckPerformanceApi<User> {
+public class UserSqlPerformacne  implements CheckPerformanceApi<User> {
 
     @Autowired
-    private UserServiceApi userService;
+    @Qualifier("userCrudService")
+    private CrudApi<User,Long> userService;
 
     @Qualifier("userBuilder")
     @Autowired
@@ -61,17 +62,13 @@ public class UserSqlPerformacne implements CheckPerformanceApi<User> {
     @Override
     public User findById() {
         List<User> users = new ArrayList<>(userBuilder.build(100));
-        users.forEach(u -> userService.findById(u.getId()));
+       users.forEach(u -> userService.findById(u.getId()));
         return  users.get(0);
     }
 
     @Override
     public Optional<Collection<User>> findByIds() {
-        Collection<User> users = userBuilder.build(100);
-        Collection<Long> ids = new ArrayList<>();
-        users.forEach(c -> ids.add(c.getId()));
-        //users.forEach(u -> u.getId(; how to collect all ids for objects using stream.
-        return userService.findByIds(ids);
+        return null;
     }
 
 }

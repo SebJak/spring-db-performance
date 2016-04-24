@@ -9,7 +9,7 @@ import java.util.Collection;
 /**
  * Created by Sebastian on 2016-03-18.
  */
-public interface WordGroupServiceApi extends CrudApi<WordGroup, Long> {
+public interface WordGroupServiceApi {
 
     Collection<AggregationWordGroup> getAggregationWordGroup();
 

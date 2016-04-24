@@ -1,4 +1,4 @@
-package com.langpath.util.impl;
+package com.langpath.service.util.impl;
 
 import com.google.common.io.Files;
 import com.common.service.api.TimeLogger;

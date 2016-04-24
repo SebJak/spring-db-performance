@@ -10,7 +10,7 @@ import java.util.Optional;
 /**
  * Created by Sebastian on 2016-03-18.
  */
-public interface WordServiceApi extends CrudApi<Word, Long> {
+public interface WordServiceApi {
 
     Optional<Collection<Word>> findByLang(Language lang);
 }

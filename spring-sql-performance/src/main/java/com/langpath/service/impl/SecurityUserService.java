@@ -23,7 +23,7 @@ public class SecurityUserService implements SecurityUserApi {
     public User login(String login, String password) throws FailLoginException {
         Assert.hasLength(login, "Login could not be empty");
         Assert.hasLength(password, "Password could not be empty");
-        Optional<User> optionalUser = Optional.of(repository.findByLogin(login));
+        Optional<User> optionalUser = Optional.empty(); //Optional.of(repository.findByLogin(login));
         if(optionalUser.isPresent()) {
             User user = optionalUser.get();
             if(checkPassword(user.getPassword(),password)) {

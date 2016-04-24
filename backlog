@@ -1,4 +1,5 @@
-1. Add common CRUD logic for all databases
+1. Add common CRUD logic for all databases (v)
 2. Count times on neo4j
 3. Prepare solution for mongoDB or elastic search ??
 4. Prepare some solution for use procedures by db side without generate query by orm (CQRS)
+5. Think about timeLogger and abstract of methods.

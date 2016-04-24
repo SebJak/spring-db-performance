@@ -1,7 +1,6 @@
-package com.langpath.util.api;
+package com.langpath.service.util.api;
 
 import com.langpath.data.model.entity.base.BaseEntity;
-import com.langpath.data.model.entity.word.Word;
 
 import java.util.Collection;
 

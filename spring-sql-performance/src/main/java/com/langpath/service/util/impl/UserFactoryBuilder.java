@@ -1,10 +1,9 @@
-package com.langpath.util.impl;
+package com.langpath.service.util.impl;
 
 import com.langpath.data.model.entity.user.User;
 import com.langpath.data.model.entity.word.WordGroup;
-import com.langpath.data.repositories.UserRepository;
 import com.langpath.service.impl.UserService;
-import com.langpath.util.api.EntityFactoryBuilder;
+import com.langpath.service.util.api.EntityFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
