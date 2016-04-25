@@ -8,6 +8,7 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 /**
  * Created by Sebastian on 2016-04-10.
@@ -34,6 +35,6 @@ public class User implements Serializable {
     private String email; //TODO add validator
 
     @Relationship(direction = Relationship.OUTGOING)
-    private Comparable<WordGroup> wordGroups;
+    private Collection<WordGroup> wordGroups;
 
 }

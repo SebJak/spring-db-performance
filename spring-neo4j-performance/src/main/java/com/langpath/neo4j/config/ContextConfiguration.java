@@ -5,7 +5,9 @@ import com.common.service.api.TimeLogger;
 import com.common.service.impl.CrudImpl;
 import com.langpath.neo4j.model.User;
 import com.langpath.neo4j.model.Word;
+import com.langpath.neo4j.model.WordGroup;
 import com.langpath.neo4j.repositories.UserRepository;
+import com.langpath.neo4j.repositories.WordGroupRepository;
 import com.langpath.neo4j.repositories.WordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,6 +27,10 @@ public class ContextConfiguration {
     private WordRepository wordRepository;
 
     @Autowired
+    private WordGroupRepository wordGroupRepository;
+
+
+    @Autowired
     @Qualifier("neo4jTimeLogger")
     private TimeLogger timeLogger;
 
@@ -36,5 +42,10 @@ public class ContextConfiguration {
     @Bean(name="wordCrudService")
     public CrudApi<Word, Long> getWordCrudService() {
         return new CrudImpl<>(wordRepository, timeLogger);
+    }
+
+    @Bean(name="wordGroupCrudService")
+    public CrudApi<WordGroup, Long> getWordGroupCrudService() {
+        return new CrudImpl<>(wordGroupRepository, timeLogger);
     }
 }

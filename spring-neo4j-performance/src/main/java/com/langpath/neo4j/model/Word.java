@@ -10,6 +10,7 @@ import org.neo4j.ogm.annotation.Relationship;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by Sebastian on 2016-04-12.
@@ -25,6 +26,9 @@ public class Word implements Serializable {
     @GraphId
     private Long id;
 
+    @Relationship(direction = Relationship.INCOMING)
+    private WordGroup wordGroup;
+
     //@EnumString(Language.class)
     private Language language;
 
@@ -36,4 +40,5 @@ public class Word implements Serializable {
 
     @Relationship(direction = Relationship.UNDIRECTED)
     private Collection<Word> meanings;
+
 }

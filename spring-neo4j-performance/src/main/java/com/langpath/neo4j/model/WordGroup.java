@@ -1,5 +1,7 @@
 package com.langpath.neo4j.model;
 
+import common.model.enums.Language;
+import common.model.enums.ValidationState;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,5 +34,13 @@ public class WordGroup implements Serializable {
     private Date lastTraining;
 
     private String name;
+
+    private String description;
+
+    private Date created;
+
+    private ValidationState validation;
+
+    private Language sourceLang;
 
 }

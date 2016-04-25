@@ -1,8 +1,8 @@
-package com.langpath.service.impl.performance;
+package com.langpath.neo4j.service.impl.util;
 
-import com.langpath.Application;
-import com.langpath.data.model.entity.user.User;
 import com.common.service.api.CheckPerformanceApi;
+import com.langpath.neo4j.Neo4jApplication;
+import com.langpath.neo4j.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,35 +11,34 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.assertNotNull;
-
+import static org.junit.Assert.*;
 
 /**
- * Created by Sebastian on 2016-04-06.
+ * Created by Sebastian on 2016-04-25.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(Application.class)
+@SpringApplicationConfiguration(Neo4jApplication.class)
 @ActiveProfiles(value = "test")
-public class UserSqlPerformanceTest {
+public class UserNeo4jPerformanceTest {
 
     @Autowired
-    @Qualifier("userSqlPerformance")
-    private CheckPerformanceApi<User> userSqlPerformance;
+    @Qualifier("userNeo4jPerformance")
+    private CheckPerformanceApi<User> userNeo4jPerformance;
 
     @Test
     public void testSaveOne() throws Exception {
-        assertNotNull(userSqlPerformance.saveOne());
+        assertNotNull(userNeo4jPerformance.saveOne());
     }
 
     @Test
     public void testSaveCollection() throws Exception {
         for(int i=0;i<100;i++)
-            assertNotNull(userSqlPerformance.saveCollection());
+            assertNotNull(userNeo4jPerformance.saveCollection());
     }
 
     @Test
     public void testUpdate() throws Exception {
-        assertNotNull(userSqlPerformance.update());
+        assertNotNull(userNeo4jPerformance.update());
     }
 
     @Test
@@ -49,13 +48,8 @@ public class UserSqlPerformanceTest {
 
     @Test
     public void testFindById() throws Exception {
-        assertNotNull(userSqlPerformance.findById());
+        User u = userNeo4jPerformance.saveOne();
+        assertNotNull(userNeo4jPerformance.findById(u.getId()));
     }
 
-    @Test
-    public void testFindByIds() throws Exception {
-        for(int i=0;i<100; i++) {
-            assertNotNull(userSqlPerformance.findByIds());
-        }
-    }
 }

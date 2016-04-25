@@ -1,9 +1,9 @@
-package com.langpath.service.util.impl;
+package com.langpath.neo4j.service.impl.util;
 
 import com.common.service.api.CrudApi;
-import com.langpath.data.model.entity.user.User;
-import com.langpath.data.model.entity.word.WordGroup;
 import com.common.service.api.EntityFactoryBuilder;
+import com.langpath.neo4j.model.User;
+import com.langpath.neo4j.model.WordGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class UserFactoryBuilder implements EntityFactoryBuilder<User> {
     CrudApi<User, Long> crudUser;
 
     @Autowired
-    @Qualifier("wordGroupBuilder")
+    @Qualifier("wordGroupFactoryBuilder")
     private EntityFactoryBuilder wordGroupBuilder;
 
     @Override

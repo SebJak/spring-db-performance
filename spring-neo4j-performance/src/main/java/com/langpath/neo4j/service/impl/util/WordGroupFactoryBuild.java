@@ -1,11 +1,12 @@
-package com.langpath.service.util.impl;
+package com.langpath.neo4j.service.impl.util;
 
-import com.langpath.data.model.entity.word.WordGroup;
+import com.common.service.api.CrudApi;
+import com.common.service.api.EntityFactoryBuilder;
+import com.langpath.neo4j.model.WordGroup;
 import common.model.enums.Language;
 import common.model.enums.ValidationState;
-import com.langpath.service.api.WordGroupServiceApi;
-import com.common.service.api.EntityFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,12 +17,13 @@ import java.util.UUID;
 /**
  * Created by Sebastian on 2016-04-04.
  */
-@Service("wordGroupBuilder")
+@Service("wordGroupFactoryBuilder")
 public class WordGroupFactoryBuild implements EntityFactoryBuilder<WordGroup> {
 
 
     @Autowired
-    private WordGroupServiceApi wordGroupService;
+    @Qualifier("wordGroupCrudService")
+    private CrudApi<WordGroup,Long> wordGroupCrudService;
 
     @Override
     public Collection<WordGroup> build(int count) {
@@ -29,7 +31,7 @@ public class WordGroupFactoryBuild implements EntityFactoryBuilder<WordGroup> {
         for(int i=0;i<count;i++) {
             wordsGr.add(buildOne());
         }
-        wordGroupService.save(wordsGr);
+        wordGroupCrudService.save(wordsGr);
         return wordsGr;
     }
 

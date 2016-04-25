@@ -1,27 +1,28 @@
-package com.langpath.service.util.impl;
+package com.langpath.neo4j.service.impl.util;
 
 import com.common.service.api.CrudApi;
-import com.langpath.data.model.entity.word.Word;
-import com.langpath.data.model.entity.word.WordGroup;
-import common.model.enums.Language;
-import com.langpath.service.api.WordServiceApi;
 import com.common.service.api.EntityFactoryBuilder;
+import com.langpath.neo4j.model.Word;
+import com.langpath.neo4j.model.WordGroup;
+import common.model.enums.Language;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 /**
  * Created by Sebastian on 2016-04-04.
  */
+@Service("wordFactoryBuilder")
 public class WordFactoryBuild implements EntityFactoryBuilder<Word> {
 
     @Autowired
-    @Qualifier("wordCrudServiceApi")
-    private CrudApi<Word, Long> wordCrudServiceApi;
+    @Qualifier("wordCrudService")
+    private CrudApi<Word, Long> wordCrudService;
 
     @Autowired
-    @Qualifier("wordGroupBuilder")
+    @Qualifier("wordGroupFactoryBuilder")
     private EntityFactoryBuilder wordGroupBuilder;
 
     @Override
@@ -31,7 +32,7 @@ public class WordFactoryBuild implements EntityFactoryBuilder<Word> {
         for(int i=0;i<count;i++){
             words.add(buildOne(wg.get(0)));
         }
-        wordCrudServiceApi.save(words);
+        wordCrudService.save(words);
 
         return words;
     }
@@ -42,19 +43,18 @@ public class WordFactoryBuild implements EntityFactoryBuilder<Word> {
         word.setGoodAnswers(rm.nextInt());
         switch (rm.nextInt()/3){
             case 1:
-                word.setLang(Language.DE);
+                word.setLanguage(Language.DE);
                 break;
             case 2:
-                word.setLang(Language.PL);
+                word.setLanguage(Language.PL);
                 break;
             case 0:
-                word.setLang(Language.EN);
+                word.setLanguage(Language.EN);
                 break;
             default: break;
         }
-        word.setLastTraining(new Date());
         word.setValue(UUID.randomUUID().toString());
-        word.setWrongAnswers(rm.nextInt());
+        word.setGoodAnswers(rm.nextInt());
         word.setWordGroup(wg);
 
         return word;

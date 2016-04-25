@@ -1,9 +1,10 @@
-package com.langpath.service.impl.performance;
+package com.langpath.neo4j.service.impl.util;
 
-import com.common.service.api.CrudApi;
-import com.langpath.data.model.entity.user.User;
+
 import com.common.service.api.CheckPerformanceApi;
+import com.common.service.api.CrudApi;
 import com.common.service.api.EntityFactoryBuilder;
+import com.langpath.neo4j.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -16,14 +17,14 @@ import java.util.Optional;
 /**
  * Created by Sebastian on 2016-04-03.
  */
-@Service("userSqlPerformance")
-public class UserSqlPerformacne  implements CheckPerformanceApi<User> {
+@Service("userNeo4jPerformance")
+public class UserNeo4jPerformance implements CheckPerformanceApi<User> {
 
     @Autowired
     @Qualifier("userCrudService")
-    private CrudApi<User,Long> userService;
+    private CrudApi<User, Long> userCrudService;
 
-    @Qualifier("userBuilder")
+    @Qualifier("userFactoryBuilder")
     @Autowired
     private EntityFactoryBuilder userBuilder;
 
@@ -35,35 +36,35 @@ public class UserSqlPerformacne  implements CheckPerformanceApi<User> {
     }
 
     @Override
-    public Collection<User> saveCollection(){
-       Collection<User> users = userBuilder.build(100);
+    public Collection<User> saveCollection() {
+        Collection<User> users = userBuilder.build(100);
         return users;
     }
 
     @Override
-    public User update(){
+    public User update() {
         return update(100);
     }
 
     private User update(int times) {
         List<User> users = new ArrayList<>(userBuilder.build(1));
-        for(int i=0;i<times;i++)
-            users.forEach(u -> userService.update(u));
-        return  users.get(0);
+        for (int i = 0; i < times; i++)
+            users.forEach(u -> userCrudService.update(u));
+        return users.get(0);
     }
 
     @Override
     public User remove() {
         List<User> users = new ArrayList<>(userBuilder.build(1));
-        users.forEach(u -> userService.remove(u));
-        return  users.get(0);
+        users.forEach(u -> userCrudService.remove(u));
+        return users.get(0);
     }
 
     @Override
     public User findById() {
         List<User> users = new ArrayList<>(userBuilder.build(100));
-       users.forEach(u -> userService.findById(u.getId()));
-        return  users.get(0);
+        users.forEach(u -> userCrudService.findById(u.getId()));
+        return users.get(0);
     }
 
     @Override
