@@ -5,13 +5,16 @@ import com.common.service.api.TimeLogger;
 import com.common.service.impl.CrudImpl;
 import com.langpath.data.model.entity.user.User;
 import com.langpath.data.model.entity.word.Word;
+import com.langpath.data.model.entity.word.WordGroup;
 import com.langpath.data.repositories.UserRepository;
+import com.langpath.data.repositories.WordGroupRepository;
 import com.langpath.data.repositories.WordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 /**
  * Created by Sebastian on 2016-04-23.
@@ -21,10 +24,16 @@ import org.springframework.context.annotation.Configuration;
 public class ContextConfiguration {
 
     @Autowired
+    private Environment env;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private WordRepository wordRepository;
+
+    @Autowired
+    private WordGroupRepository wordGroupRepository;
 
     @Autowired
     @Qualifier("sqlTimeLogger")
@@ -38,6 +47,16 @@ public class ContextConfiguration {
     @Bean(name = "wordCrudService")
     CrudApi<Word, Long> getWordCrud() {
         return new CrudImpl<>(wordRepository, timeLogger);
+    }
+
+    @Bean(name = "wordGroupCrudService")
+    CrudApi<WordGroup, Long> getWordGroupCrud() {
+        return new CrudImpl<>(wordGroupRepository, timeLogger);
+    }
+
+    @Bean(name = "sqlTimeLogger")
+    public TimeLogger getTimeLogger() {
+        return new TimeLogger(env.getRequiredProperty("sqlTime.log"));
     }
 
 }

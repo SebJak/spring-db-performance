@@ -41,39 +41,39 @@ public class FileReaderUtil {
         return lines;
     }
 
-    public Collection<Word> readWords(int count) {
-        assert FILE_PATH != null : "The FILE_PATH is null, You need to initialize FileReaderUtil.";
-        Collection<Word> words = new ArrayList<>();
-        Optional<WordGroup> wordGroupOpt = wordGroupService.getRandom();
-        WordGroup wordGroup;
-        if(wordGroupOpt.isPresent()) {
-            wordGroup = wordGroupOpt.get();
-        }
-        else{
-            wordGroup = new WordGroup();
-            wordGroup.setName("Word Group");
-            wordGroup.setSourceLang(Language.PL);
-            wordGroupService.save(wordGroup);
-        }
-        List<String> stringWords = readLines(count);
-
-        stringWords.stream().forEach(line -> {
-            String[] splitedLine = line.split("::");
-            Word w1 = new Word();
-            w1.setLang(Language.EN);
-            w1.setValue(splitedLine[0]);
-            w1.setWordGroup(wordGroup);
-
-            Word w2 = new Word();
-            w2.setLang(Language.PL);
-            w2.setValue(splitedLine[1]);
-            w2.setWordGroup(wordGroup);
-            w2.setSource(w1);
-
-            words.add(w1);
-            words.add(w2);
-        });
-
-        return words;
-    }
+//    public Collection<Word> readWords(int count) {
+//        assert FILE_PATH != null : "The FILE_PATH is null, You need to initialize FileReaderUtil.";
+//        Collection<Word> words = new ArrayList<>();
+//        Optional<WordGroup> wordGroupOpt = wordGroupService.getRandom();
+//        WordGroup wordGroup;
+//        if(wordGroupOpt.isPresent()) {
+//            wordGroup = wordGroupOpt.get();
+//        }
+//        else{
+//            wordGroup = new WordGroup();
+//            wordGroup.setName("Word Group");
+//            wordGroup.setSourceLang(Language.PL);
+//            wordGroupService.save(wordGroup);
+//        }
+//        List<String> stringWords = readLines(count);
+//
+//        stringWords.stream().forEach(line -> {
+//            String[] splitedLine = line.split("::");
+//            Word w1 = new Word();
+//            w1.setLang(Language.EN);
+//            w1.setValue(splitedLine[0]);
+//            w1.setWordGroup(wordGroup);
+//
+//            Word w2 = new Word();
+//            w2.setLang(Language.PL);
+//            w2.setValue(splitedLine[1]);
+//            w2.setWordGroup(wordGroup);
+//            w2.setSource(w1);
+//
+//            words.add(w1);
+//            words.add(w2);
+//        });
+//
+//        return words;
+//    }
 }

@@ -8,6 +8,9 @@ repositories {
 allprojects {
     apply plugin: 'java'
     apply plugin: 'findbugs'
+    apply plugin: 'jacoco'
+
+    sourceCompatibility = 1.8
 
     dependencies {
         //Spring
@@ -31,7 +34,15 @@ allprojects {
 
     findbugs {
         ignoreFailures = true
-        reportsDir = file("$project.buildDir/findbugsReports")
+        reportsDir = file("${buildDir}/findbugsReports")
+    }
+
+    jacocoTestReport {
+        reports {
+            xml.enabled false
+            csv.enabled false
+            html.destination "${buildDir}/jacocoHtml"
+        }
     }
 }
 

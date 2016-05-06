@@ -1,11 +1,13 @@
 package com.langpath.service.util.impl;
 
+import com.common.service.api.CrudApi;
 import com.langpath.data.model.entity.word.WordGroup;
 import common.model.enums.Language;
 import common.model.enums.ValidationState;
 import com.langpath.service.api.WordGroupServiceApi;
 import com.common.service.api.EntityFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,7 +23,8 @@ public class WordGroupFactoryBuild implements EntityFactoryBuilder<WordGroup> {
 
 
     @Autowired
-    private WordGroupServiceApi wordGroupService;
+    @Qualifier("wordGroupCrudServiceApi")
+    private CrudApi<WordGroup, Long> wordGroupService;
 
     @Override
     public Collection<WordGroup> build(int count) {

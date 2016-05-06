@@ -60,15 +60,8 @@ public class UserSqlPerformacne  implements CheckPerformanceApi<User> {
     }
 
     @Override
-    public User findById() {
-        List<User> users = new ArrayList<>(userBuilder.build(100));
-       users.forEach(u -> userService.findById(u.getId()));
-        return  users.get(0);
-    }
-
-    @Override
-    public Optional<Collection<User>> findByIds() {
-        return null;
+    public User findById(Long id) {
+        return userService.findById(id).get();
     }
 
 }
