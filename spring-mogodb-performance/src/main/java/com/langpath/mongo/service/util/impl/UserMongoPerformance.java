@@ -1,10 +1,10 @@
-package com.langpath.neo4j.service.impl.util;
+package com.langpath.mongo.service.util.impl;
 
 
 import com.common.service.api.CheckPerformanceApi;
 import com.common.service.api.CrudApi;
 import com.common.service.api.EntityFactoryBuilder;
-import com.langpath.neo4j.model.User;
+import com.langpath.mongo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -17,8 +17,8 @@ import java.util.Optional;
 /**
  * Created by Sebastian on 2016-04-03.
  */
-@Service("userNeo4jPerformance")
-public class UserNeo4jPerformance implements CheckPerformanceApi<User> {
+@Service("userMongoPerformance")
+public class UserMongoPerformance implements CheckPerformanceApi<User> {
 
     @Autowired
     @Qualifier("userCrudService")

@@ -1,5 +1,17 @@
-1. Add common CRUD logic for all databases (v)
-2. Count times on neo4j
-3. Prepare solution for mongoDB or elastic search ??
+TODO
+------------------------------------------
 4. Prepare some solution for use procedures by db side without generate query by orm (CQRS)
 5. Think about timeLogger and abstract of methods.
+6. Count time in MongoDb module
+7. Prepare Context for crud and performance injection.
+8. Prepare some analysis of times each dbs.
+
+IN PROGRESS
+------------------------------------------
+3. Prepare solution for mongoDB (x)
+
+
+DONE
+------------------------------------------
+1. Add common CRUD logic for all databases (x)
+2. Count times on neo4j (x)

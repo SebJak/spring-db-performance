@@ -1,9 +1,11 @@
 package com.langpath.mongo.config;
 
 import com.mongodb.MongoClient;
-import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
@@ -14,16 +16,19 @@ import java.net.UnknownHostException;
 /**
  * Created by Sebastian on 2016-04-27.
  */
-@Configurable
+@Configuration
 @ComponentScan("com.langpath.service.mongo")
 @EnableMongoRepositories(basePackages = "com.langpath.mongo.repository")
 public class MongoConfiguration {
 
-    private static final String name = "langpath";
+    @Autowired
+    private Environment env;
 
-    private static final String url = "127.0.0.1";
+    private static final String name = "langpath"; //TODO read from properties
 
-    private static final int port = 27017;
+    private static final String url = "127.0.0.1"; //TODO read from properties
+
+    private static final int port = 27017; //TODO read from properties
 
     @Bean
     public String getDatabaseName() {

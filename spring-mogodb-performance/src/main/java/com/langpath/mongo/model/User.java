@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.Set;
 
 /**
@@ -13,12 +14,12 @@ import java.util.Set;
  */
 @Data
 @Document(collection = "users")
-public class User {
+public class User implements Serializable{
 
     @Indexed
-    private Long id;
-
     @Id
+    private String id;
+
     @Indexed
     private String nick;
 
@@ -34,5 +35,5 @@ public class User {
     @Indexed
     private Role role;
 
-    private Set<Long> wordGroups;
+    private Set<String> wordGroups;
 }

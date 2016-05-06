@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 /**
  * Created by Sebastian on 2016-04-23.
@@ -29,6 +30,8 @@ public class ContextConfiguration {
     @Autowired
     private WordGroupRepository wordGroupRepository;
 
+    @Autowired
+    private Environment env;
 
     @Autowired
     @Qualifier("neo4jTimeLogger")
@@ -47,5 +50,10 @@ public class ContextConfiguration {
     @Bean(name="wordGroupCrudService")
     public CrudApi<WordGroup, Long> getWordGroupCrudService() {
         return new CrudImpl<>(wordGroupRepository, timeLogger);
+    }
+
+    @Bean(name = "neo4jTimeLogger")
+    public TimeLogger getTimeLogger() {
+        return new TimeLogger(env.getRequiredProperty("neo4jTime.log"));
     }
 }
