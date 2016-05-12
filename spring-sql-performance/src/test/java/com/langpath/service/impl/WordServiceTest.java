@@ -86,8 +86,9 @@ public class WordServiceTest {
     }
 
     private Collection<Word> getWords(int count) {
-        Collection<Word> words = utils.readWords(count);
-        return words;
+        //TODO
+        //Collection<Word> words = utils.readWords(count);
+        return null;
     }
 
     private Optional<Collection<Word>> saveWords(int count) {

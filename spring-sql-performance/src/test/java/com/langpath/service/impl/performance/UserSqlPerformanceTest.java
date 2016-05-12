@@ -49,13 +49,8 @@ public class UserSqlPerformanceTest {
 
     @Test
     public void testFindById() throws Exception {
-        assertNotNull(userSqlPerformance.findById());
+        User user= userSqlPerformance.saveOne();
+        assertNotNull(userSqlPerformance.findById(user.getId()));
     }
 
-    @Test
-    public void testFindByIds() throws Exception {
-        for(int i=0;i<100; i++) {
-            assertNotNull(userSqlPerformance.findByIds());
-        }
-    }
 }
