@@ -10,7 +10,8 @@
 .mtj.tmp/
 
 #Gradle project:
-/build
+.*/build
+.*/out
 /.gradle
 
 # Package Files #
