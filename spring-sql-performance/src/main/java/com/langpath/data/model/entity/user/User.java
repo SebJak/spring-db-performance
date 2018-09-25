@@ -1,8 +1,9 @@
 package com.langpath.data.model.entity.user;
 
-import com.langpath.data.model.entity.base.BaseEntity;
 import com.langpath.data.model.entity.word.WordGroup;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -16,28 +17,49 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
+/*@NamedStoredProcedureQuery(
+        name="getWorstAnswered",
+        procedureName="getWorstAnsweredWord",
+        parameters={
+            @StoredProcedureParameter(name="userId", type = Integer.class)
+        },
+        resultClasses = {WorstAnsweredWord.class}
+
+)*/
 @Table(name="USERS")
-public class User extends BaseEntity {
+public class User {
 
     @Getter(AccessLevel.NONE)
     final static long serialVersionUID = 1l;
 
+    @Id
+    @Column(name = "ID", columnDefinition = "serial")
+    @SequenceGenerator(name="users_id_seq",
+            sequenceName="users_id_seq",
+            allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator="users_id_seq")
+    private Long id;
+
+    @Column(length = 64)
     private String firstName;
 
+    @Column(length = 64)
     private String lastName;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 64)
     private String login;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 64)
     private String password;
 
+    @Column(length = 64, nullable = false, unique = true)
     private String email; //todo: Add check pattern
 
     @ManyToMany
     @JoinTable(
             name="USR_WORD_GR",
-            joinColumns=@JoinColumn(name="USER_ID", referencedColumnName="ID"),
+            joinColumns=@JoinColumn(name="USER_ID", referencedColumnName="ID" ),
             inverseJoinColumns=@JoinColumn(name="WORD_GROUP_ID", referencedColumnName="ID"))
     private Set<WordGroup> wordGroups;
 
@@ -60,12 +82,15 @@ public class User extends BaseEntity {
         return result;
     }
 
-    //TODO
-    /*
-        - types od user STUDENT, TUTOR
-        - groups of users,
-        - some address data ect.
-     */
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 
 }

@@ -3,7 +3,7 @@ package com.langpath.service.impl;
 import static org.junit.Assert.*;
 
 import com.langpath.data.model.entity.base.BaseEntity;
-import com.common.service.api.CrudApi;
+import com.service.api.CrudApi;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

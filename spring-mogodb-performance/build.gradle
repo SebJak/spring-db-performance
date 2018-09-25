@@ -12,4 +12,10 @@ repositories {
 dependencies {
     compile project(':common-core')
 
+    compile ('org.springframework.data:spring-data-mongodb:2.1.0.RELEASE'){
+        exclude module: 'spring-data-commons'
+    }
+
+    testCompile group: "de.flapdoodle.embed", name: "de.flapdoodle.embed.mongo", version: "2.0.1"
+
 }

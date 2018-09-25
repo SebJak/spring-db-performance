@@ -1,8 +1,7 @@
 package com.langpath.mongo.service.util.impl;
 
-import com.common.service.api.EntityFactoryBuilder;
+import com.service.api.EntityFactoryBuilder;
 import com.langpath.mongo.model.Word;
-import common.model.enums.Language;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -15,7 +14,7 @@ public class WordFactoryBuilder implements EntityFactoryBuilder<Word> {
 
 
     @Override
-    public Collection<Word> build(int count) {
+    public Collection<Word> buildAndPersist(int count) {
         Collection<Word> words= new ArrayList<>();
         for(int i=0;i<count;i++){
             words.add(buildOne());
@@ -24,10 +23,15 @@ public class WordFactoryBuilder implements EntityFactoryBuilder<Word> {
         return words;
     }
 
+    @Override
+    public Collection<Word> build(int count) {
+        return null;
+    }
+
     private Word buildOne(){
         Word word = new Word();
         word.setValue(UUID.randomUUID().toString());
-        word.setId(UUID.randomUUID().toString());
+//        word.setId(UUID.randomUUID().toString());
         word.setExample("Example sentence.");
         return word;
     }

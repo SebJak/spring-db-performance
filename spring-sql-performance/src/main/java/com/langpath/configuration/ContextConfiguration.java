@@ -1,8 +1,7 @@
 package com.langpath.configuration;
 
-import com.common.service.api.CrudApi;
-import com.common.service.api.TimeLogger;
-import com.common.service.impl.CrudImpl;
+import com.service.api.CrudApi;
+import com.service.impl.CrudImpl;
 import com.langpath.data.model.entity.user.User;
 import com.langpath.data.model.entity.word.Word;
 import com.langpath.data.model.entity.word.WordGroup;
@@ -15,11 +14,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * Created by Sebastian on 2016-04-23.
  */
 @Configuration
+@EnableJpaRepositories(basePackages = "com.langpath.data.repositories")
 @ComponentScan(basePackages = "com.langpath")
 public class ContextConfiguration {
 

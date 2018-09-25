@@ -1,10 +1,9 @@
 package com.langpath.mongo.config;
 
-import com.common.service.api.CrudApi;
-import com.common.service.api.TimeLogger;
-import com.common.service.impl.CrudImpl;
+import com.service.api.CrudApi;
+import com.service.impl.CrudImpl;
+import com.service.impl.FileReaderUtil;
 import com.langpath.mongo.model.User;
-import com.langpath.mongo.model.Word;
 import com.langpath.mongo.model.WordGroup;
 import com.langpath.mongo.repository.UserRepository;
 import com.langpath.mongo.repository.WordGroupRepository;
@@ -19,32 +18,28 @@ import org.springframework.core.env.Environment;
  */
 @Configuration
 public class ContextConfiguration {
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private WordGroupRepository wordGroupRepository;
-
     @Autowired
     private Environment env;
 
-    @Autowired
-    @Qualifier("mongoTimeLogger")
-    private TimeLogger timeLogger;
-
     @Bean(name="userCrudService")
-    public CrudApi<User, Long> getUserCrudService() {
+    public CrudApi<User, String> getUserCrudService(@Autowired UserRepository userRepository,
+                                                    @Autowired  @Qualifier("mongoTimeLogger") TimeLogger timeLogger) {
         return new CrudImpl<>(userRepository, timeLogger);
     }
 
     @Bean(name="wordGroupCrudService")
-    public CrudApi<WordGroup, Long> getWordGroupCrudService() {
+    public CrudApi<WordGroup, String> getWordGroupCrudService(@Autowired WordGroupRepository wordGroupRepository,
+                                                              @Autowired  @Qualifier("mongoTimeLogger") TimeLogger timeLogger) {
         return new CrudImpl<>(wordGroupRepository, timeLogger);
     }
 
     @Bean(name = "mongoTimeLogger")
     public TimeLogger getTimeLogger() {
         return new TimeLogger(env.getRequiredProperty("mongoTime.log"));
+    }
+
+    @Bean(name = "FileReaderUtil")
+    public FileReaderUtil getFileReaderUtil() {
+        return new FileReaderUtil(env.getRequiredProperty("words.fileName"));
     }
 }

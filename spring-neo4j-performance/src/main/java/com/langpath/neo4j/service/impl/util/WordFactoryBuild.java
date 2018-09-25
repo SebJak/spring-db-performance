@@ -1,10 +1,10 @@
 package com.langpath.neo4j.service.impl.util;
 
-import com.common.service.api.CrudApi;
-import com.common.service.api.EntityFactoryBuilder;
+import com.service.api.CrudApi;
+import com.service.api.EntityFactoryBuilder;
 import com.langpath.neo4j.model.Word;
 import com.langpath.neo4j.model.WordGroup;
-import common.model.enums.Language;
+import com.model_old.enums.Language;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -26,8 +26,8 @@ public class WordFactoryBuild implements EntityFactoryBuilder<Word> {
     private EntityFactoryBuilder wordGroupBuilder;
 
     @Override
-    public Collection<Word> build(int count) {
-        List<WordGroup> wg = new ArrayList<>(wordGroupBuilder.build(1));
+    public Collection<Word> buildAndPersist(int count) {
+        List<WordGroup> wg = new ArrayList<>(wordGroupBuilder.buildAndPersist(1));
         Collection<Word> words= new ArrayList<>();
         for(int i=0;i<count;i++){
             words.add(buildOne(wg.get(0)));
@@ -35,6 +35,11 @@ public class WordFactoryBuild implements EntityFactoryBuilder<Word> {
         wordCrudService.save(words);
 
         return words;
+    }
+
+    @Override
+    public Collection<Word> build(int count) {
+        return null;
     }
 
     private Word buildOne(WordGroup wg){

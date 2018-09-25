@@ -1,7 +1,7 @@
 package com.langpath.neo4j.model;
 
-import common.model.enums.Language;
-import common.model.enums.ValidationState;
+import com.model_old.enums.Language;
+import com.model_old.enums.ValidationState;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,7 +28,7 @@ public class WordGroup implements Serializable {
     private Long id;
 
     @Relationship(direction = Relationship.OUTGOING)
-    private Comparable<Word> words;
+    private Iterable<Word> words;
 
     @DateString("yy-MM-dd")
     private Date lastTraining;
@@ -42,5 +42,6 @@ public class WordGroup implements Serializable {
     private ValidationState validation;
 
     private Language sourceLang;
+
 
 }

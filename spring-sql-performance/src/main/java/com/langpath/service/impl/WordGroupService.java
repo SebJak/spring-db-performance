@@ -1,13 +1,10 @@
 package com.langpath.service.impl;
 
-import com.langpath.data.model.entity.word.WordGroup;
-import common.model.AggregationWordGroup;
+import com.model_old.AggregationWordGroup;
 import com.langpath.data.repositories.WordGroupRepository;
 
 import com.langpath.service.api.WordGroupServiceApi;
 
-import com.common.service.api.TimeLogger;
-import common.model.enums.Count;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +12,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Sebastian on 2016-03-18.

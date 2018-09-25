@@ -12,11 +12,22 @@ repositories {
 
 dependencies {
     compile project(':common-core')
+    compile('org.springframework.data:spring-data-jpa:1.10.2.RELEASE'){
+        exclude module: 'spring-data-commons'
+        exclude module: 'spring-orm'
+    }
+    compile group: 'org.springframework', name: 'spring-orm', version: '4.3.1.RELEASE'
 
-
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.1.Final'
+    compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: '1.0.0.Final'
 
     //DataBase
-    compile 'postgresql:postgresql:9.1-901-1.jdbc4'
+    compile group: 'org.postgresql', name: 'postgresql', version: '9.4-1206-jdbc42'
+
+
+
+    compile group: 'org.lazyluke', name: 'log4jdbc-remix', version: '0.2.7'
+
 }
 
 

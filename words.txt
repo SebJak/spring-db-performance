@@ -385,7 +385,7 @@ pack::paczka
 each::każdy
 departures hall::hala odlotów
 World Cup::puchar świata
-get through sth::przejść przez coś, zakończyć (np. ciężki etap w życiu, czytanie książki)
+get through sth::przejść przez coś, zakończyć
 hairdryer::suszarka do włosów
 peppy::zrywny, pełen wigoru, pełen werwy
 archery::łucznictwo

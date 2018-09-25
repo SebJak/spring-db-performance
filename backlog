@@ -2,16 +2,21 @@ TODO
 ------------------------------------------
 4. Prepare some solution for use procedures by db side without generate query by orm (CQRS)
 5. Think about timeLogger and abstract of methods.
-6. Count time in MongoDb module
-7. Prepare Context for crud and performance injection.
 8. Prepare some analysis of times each dbs.
+9. Add Rest Api for Crud methods.
+10. Add detailed queries for each database and create rest api
+11. Create the simple UI forms for crud methods.
+12. Check removing from word table.
 
 IN PROGRESS
 ------------------------------------------
-3. Prepare solution for mongoDB (x)
+
 
 
 DONE
 ------------------------------------------
 1. Add common CRUD logic for all databases (x)
 2. Count times on neo4j (x)
+3. Prepare solution for mongoDB (x)
+6. Count time in MongoDb module (x)
+7. Prepare Context for crud and performance injection. (x)

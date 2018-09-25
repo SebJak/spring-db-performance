@@ -2,7 +2,7 @@ package com.langpath.service.impl;
 
 import static org.junit.Assert.*;
 
-import com.common.service.api.CrudApi;
+import com.service.api.CrudApi;
 import com.langpath.Application;
 import com.langpath.data.model.entity.user.User;
 import com.langpath.data.model.entity.word.Word;

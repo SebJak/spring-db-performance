@@ -2,9 +2,9 @@ package com.langpath.neo4j;
 
 import static org.junit.Assert.*;
 
-import com.common.service.impl.CrudImpl;
+import com.service.impl.CrudImpl;
 import com.langpath.neo4j.model.Word;
-import common.model.enums.Language;
+import com.model_old.enums.Language;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

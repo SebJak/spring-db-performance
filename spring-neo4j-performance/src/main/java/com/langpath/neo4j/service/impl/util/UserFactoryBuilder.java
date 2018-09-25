@@ -1,7 +1,7 @@
 package com.langpath.neo4j.service.impl.util;
 
-import com.common.service.api.CrudApi;
-import com.common.service.api.EntityFactoryBuilder;
+import com.service.api.CrudApi;
+import com.service.api.EntityFactoryBuilder;
 import com.langpath.neo4j.model.User;
 import com.langpath.neo4j.model.WordGroup;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +25,18 @@ public class UserFactoryBuilder implements EntityFactoryBuilder<User> {
     private EntityFactoryBuilder wordGroupBuilder;
 
     @Override
-    public Collection<User> build(int count) {
+    public Collection<User> buildAndPersist(int count) {
         Collection<User> users = new ArrayList<>();
         for(int i=0;i<count;i++){
             users.add(buildOne());
         }
         crudUser.save(users);
         return users;
+    }
+
+    @Override
+    public Collection<User> build(int count) {
+        return null;
     }
 
     private User buildOne() {
@@ -47,6 +52,6 @@ public class UserFactoryBuilder implements EntityFactoryBuilder<User> {
     }
 
     private Set<WordGroup> getWordGroups(int count) {
-        return new HashSet<>(wordGroupBuilder.build(count));
+        return new HashSet<>(wordGroupBuilder.buildAndPersist(count));
     }
 }

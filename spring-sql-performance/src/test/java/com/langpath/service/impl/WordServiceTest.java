@@ -2,7 +2,7 @@ package com.langpath.service.impl;
 
 import static org.junit.Assert.*;
 
-import com.common.service.api.CrudApi;
+import com.service.api.CrudApi;
 import com.langpath.Application;
 import com.langpath.data.model.entity.word.Word;
 import com.langpath.service.util.FileReaderUtil;
@@ -55,7 +55,7 @@ public class WordServiceTest {
         //First we need to save:
         Optional<Collection<Word>> savedWords = saveWords(1);
 
-        //Then we can update.
+        //Then we can updateOne.
         Collection<Word> wordsToUpdate = savedWords.get();
         wordsToUpdate.forEach(word -> word.setValue(updateValue));
         wordsToUpdate.forEach(word -> wordService.update(word).ifPresent(w -> assertEquals("Should be updated", updateValue, w.getValue())));

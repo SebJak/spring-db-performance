@@ -19,7 +19,7 @@ import javax.annotation.Resource;
  */
 @Configuration
 @EnableNeo4jRepositories(basePackages = "com.langpath.neo4j.repositories")
-@EnableTransactionManagement
+@EnableTransactionManagement(mode = AdviceMode.PROXY)
 @ComponentScan(basePackages = "com.langpath.neo4j")
 public class Neo4jAppConfiguration extends Neo4jConfiguration {
 
@@ -29,7 +29,6 @@ public class Neo4jAppConfiguration extends Neo4jConfiguration {
     private static final Logger logger = LoggerFactory.getLogger(Neo4jAppConfiguration.class);
 
     @Bean
-    //@Override
     public Neo4jServer neo4jServer() {
         logger.info("Initialize neo4j Server.");
         final String url = env.getRequiredProperty("neo4j.server.url");

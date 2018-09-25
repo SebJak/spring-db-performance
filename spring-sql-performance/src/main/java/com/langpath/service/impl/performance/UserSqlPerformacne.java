@@ -1,9 +1,8 @@
 package com.langpath.service.impl.performance;
 
-import com.common.service.api.CrudApi;
+import com.service.api.CrudApi;
 import com.langpath.data.model.entity.user.User;
-import com.common.service.api.CheckPerformanceApi;
-import com.common.service.api.EntityFactoryBuilder;
+import com.service.api.EntityFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Created by Sebastian on 2016-04-03.
@@ -23,38 +22,43 @@ public class UserSqlPerformacne  implements CheckPerformanceApi<User> {
     @Qualifier("userCrudService")
     private CrudApi<User,Long> userService;
 
-    @Qualifier("userBuilder")
+
     @Autowired
+    @Qualifier("userFactoryBuilder")
     private EntityFactoryBuilder userBuilder;
 
 
     @Override
     public User saveOne() {
-        List<User> userList = new ArrayList<>(userBuilder.build(1));
+        List<User> userList = new ArrayList<>(userBuilder.buildAndPersist(1));
         return userList.get(0);
     }
 
     @Override
     public Collection<User> saveCollection(){
-       Collection<User> users = userBuilder.build(100);
+       Collection<User> users = userBuilder.buildAndPersist(100);
         return users;
     }
 
     @Override
-    public User update(){
-        return update(100);
+    public User updateOne(){
+        return userService.update(update(1).stream().findFirst().get()).get(); //FIXME szachu machu :)
     }
 
-    private User update(int times) {
-        List<User> users = new ArrayList<>(userBuilder.build(1));
-        for(int i=0;i<times;i++)
-            users.forEach(u -> userService.update(u));
-        return  users.get(0);
+    @Override
+    public Iterable<User> updateCollection() {
+        return userService.update(update(100)).get();
+    }
+
+    private Collection<User> update(int times) {
+        List<User> users = new ArrayList<>(userBuilder.buildAndPersist(times));
+        users.forEach(u -> u.setLastName(UUID.randomUUID().toString()));
+        return  users;
     }
 
     @Override
     public User remove() {
-        List<User> users = new ArrayList<>(userBuilder.build(1));
+        List<User> users = new ArrayList<>(userBuilder.buildAndPersist(100));
         users.forEach(u -> userService.remove(u));
         return  users.get(0);
     }
@@ -63,5 +67,6 @@ public class UserSqlPerformacne  implements CheckPerformanceApi<User> {
     public User findById(Long id) {
         return userService.findById(id).get();
     }
+
 
 }

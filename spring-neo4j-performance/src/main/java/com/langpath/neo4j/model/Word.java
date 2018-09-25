@@ -1,6 +1,6 @@
 package com.langpath.neo4j.model;
 
-import common.model.enums.Language;
+import com.model_old.enums.Language;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,6 @@ import org.neo4j.ogm.annotation.Relationship;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 
 /**
  * Created by Sebastian on 2016-04-12.
@@ -18,7 +17,7 @@ import java.util.Date;
 @NodeEntity
 @Getter
 @Setter
-public class Word implements Serializable {
+public class Word implements Comparable<Word>, Serializable {
 
     @Getter(AccessLevel.NONE)
     final static long serialVersionUID = 1l;
@@ -41,4 +40,8 @@ public class Word implements Serializable {
     @Relationship(direction = Relationship.UNDIRECTED)
     private Collection<Word> meanings;
 
+    @Override
+    public int compareTo(Word word) {
+        return (int) (this.id - word.getId());
+    }
 }

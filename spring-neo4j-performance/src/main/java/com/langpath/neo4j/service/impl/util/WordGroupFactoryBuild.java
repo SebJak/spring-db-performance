@@ -1,10 +1,10 @@
 package com.langpath.neo4j.service.impl.util;
 
-import com.common.service.api.CrudApi;
-import com.common.service.api.EntityFactoryBuilder;
+import com.service.api.CrudApi;
+import com.service.api.EntityFactoryBuilder;
 import com.langpath.neo4j.model.WordGroup;
-import common.model.enums.Language;
-import common.model.enums.ValidationState;
+import com.model_old.enums.Language;
+import com.model_old.enums.ValidationState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class WordGroupFactoryBuild implements EntityFactoryBuilder<WordGroup> {
     private CrudApi<WordGroup,Long> wordGroupCrudService;
 
     @Override
-    public Collection<WordGroup> build(int count) {
+    public Collection<WordGroup> buildAndPersist(int count) {
         Collection<WordGroup> wordsGr = new ArrayList<>();
         for(int i=0;i<count;i++) {
             wordsGr.add(buildOne());
@@ -35,12 +35,17 @@ public class WordGroupFactoryBuild implements EntityFactoryBuilder<WordGroup> {
         return wordsGr;
     }
 
+    @Override
+    public Collection<WordGroup> build(int count) {
+        return null;
+    }
+
     private WordGroup buildOne(){
         WordGroup wordGroup = new WordGroup();
         wordGroup.setDescription("Description");
         wordGroup.setName("Name_"+ UUID.randomUUID());
         Random rm = new Random();
-        switch (rm.nextInt()/3){
+        switch (rm.nextInt()%3){
             case 0:
                 wordGroup.setValidation(ValidationState.WARNING);
                 wordGroup.setSourceLang(Language.DE);

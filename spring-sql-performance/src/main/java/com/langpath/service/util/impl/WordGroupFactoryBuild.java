@@ -1,18 +1,17 @@
 package com.langpath.service.util.impl;
 
-import com.common.service.api.CrudApi;
+import com.service.api.CrudApi;
+import com.google.common.collect.Lists;
+import com.langpath.data.model.entity.word.Word;
 import com.langpath.data.model.entity.word.WordGroup;
-import common.model.enums.Language;
-import common.model.enums.ValidationState;
-import com.langpath.service.api.WordGroupServiceApi;
-import com.common.service.api.EntityFactoryBuilder;
+import com.model_old.enums.Language;
+import com.service.api.EntityFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -23,8 +22,22 @@ public class WordGroupFactoryBuild implements EntityFactoryBuilder<WordGroup> {
 
 
     @Autowired
-    @Qualifier("wordGroupCrudServiceApi")
+    @Qualifier("wordGroupCrudService")
     private CrudApi<WordGroup, Long> wordGroupService;
+
+    @Autowired
+    @Qualifier("wordCrudService")
+    private CrudApi<Word, Long> wordService;
+
+    @Autowired
+    @Qualifier("wordBuilder")
+    private EntityFactoryBuilder wordBuilder;
+
+    @Override
+    public Collection<WordGroup> buildAndPersist(int count) {
+        Collection<WordGroup> wordsGr = build(count);
+         return Lists.newArrayList(wordGroupService.save(wordsGr).get());
+    }
 
     @Override
     public Collection<WordGroup> build(int count) {
@@ -32,7 +45,6 @@ public class WordGroupFactoryBuild implements EntityFactoryBuilder<WordGroup> {
         for(int i=0;i<count;i++) {
             wordsGr.add(buildOne());
         }
-        wordGroupService.save(wordsGr);
         return wordsGr;
     }
 
@@ -40,24 +52,11 @@ public class WordGroupFactoryBuild implements EntityFactoryBuilder<WordGroup> {
         WordGroup wordGroup = new WordGroup();
         wordGroup.setDescription("Description");
         wordGroup.setName("Name_"+ UUID.randomUUID());
-        Random rm = new Random();
-        switch (rm.nextInt()/3){
-            case 0:
-                wordGroup.setValidation(ValidationState.WARNING);
-                wordGroup.setSourceLang(Language.DE);
-                break;
-            case 1:
-                wordGroup.setValidation(ValidationState.ERROR);
-                wordGroup.setSourceLang(Language.EN);
-                break;
-            case 2:
-                wordGroup.setValidation(ValidationState.GOOD);
-                wordGroup.setSourceLang(Language.PL);
-                break;
-            default:
-                break;
-        }
-
+        wordGroup.setSourceLang(Language.PL);
+        Iterable<Word> words = wordBuilder.build(15);
+        final WordGroup saved = wordGroupService.save(wordGroup).get();
+        words.forEach(w -> w.setWordGroup(saved));
+        wordService.save(words);//FIXME not set the id of wordGroup because it is generated value during saving data.
         return wordGroup;
     }
 }

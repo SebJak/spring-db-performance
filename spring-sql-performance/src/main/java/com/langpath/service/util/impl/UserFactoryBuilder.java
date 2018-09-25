@@ -1,9 +1,9 @@
 package com.langpath.service.util.impl;
 
-import com.common.service.api.CrudApi;
+import com.service.api.CrudApi;
 import com.langpath.data.model.entity.user.User;
 import com.langpath.data.model.entity.word.WordGroup;
-import com.common.service.api.EntityFactoryBuilder;
+import com.service.api.EntityFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -24,8 +24,10 @@ public class UserFactoryBuilder implements EntityFactoryBuilder<User> {
     @Qualifier("wordGroupBuilder")
     private EntityFactoryBuilder wordGroupBuilder;
 
+
+
     @Override
-    public Collection<User> build(int count) {
+    public Collection<User> buildAndPersist(int count) {
         Collection<User> users = new ArrayList<>();
         for(int i=0;i<count;i++){
             users.add(buildOne());
@@ -33,6 +35,16 @@ public class UserFactoryBuilder implements EntityFactoryBuilder<User> {
         crudUser.save(users);
         return users;
     }
+
+    @Override
+    public Collection<User> build(int count) {
+        Collection<User> users = new ArrayList<>();
+        for(int i=0;i<count;i++){
+            users.add(buildOne());
+        }
+        return users;
+    }
+
 
     private User buildOne() {
         User user = new User();
@@ -49,4 +61,5 @@ public class UserFactoryBuilder implements EntityFactoryBuilder<User> {
     private Set<WordGroup> getWordGroups(int count) {
         return new HashSet<>(wordGroupBuilder.build(count));
     }
+
 }

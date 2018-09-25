@@ -1,6 +1,5 @@
 package com.langpath.neo4j.service.impl.util;
 
-import com.common.service.api.CheckPerformanceApi;
 import com.langpath.neo4j.Neo4jApplication;
 import com.langpath.neo4j.model.User;
 import org.junit.Test;
@@ -27,7 +26,8 @@ public class UserNeo4jPerformanceTest {
 
     @Test
     public void testSaveOne() throws Exception {
-        assertNotNull(userNeo4jPerformance.saveOne());
+        for(int i=0;i<2500;i++)
+            assertNotNull(userNeo4jPerformance.saveOne());
     }
 
     @Test
@@ -38,18 +38,20 @@ public class UserNeo4jPerformanceTest {
 
     @Test
     public void testUpdate() throws Exception {
-        assertNotNull(userNeo4jPerformance.update());
+        assertNotNull(userNeo4jPerformance.updateOne());
     }
 
     @Test
     public void testRemove() throws Exception {
-
+        for(int i=0;i<1000;i++)
+            userNeo4jPerformance.remove();
+        assertTrue(true);
     }
 
-    @Test
+    //@Test
     public void testFindById() throws Exception {
         User u = userNeo4jPerformance.saveOne();
-        assertNotNull(userNeo4jPerformance.findById(u.getId()));
+        //assertNotNull(userNeo4jPerformance.findById(u.getId()));
     }
 
 }

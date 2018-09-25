@@ -2,16 +2,13 @@ package com.langpath.service.impl;
 
 import com.langpath.service.api.WordServiceApi;
 import com.langpath.data.model.entity.word.Word;
-import common.model.enums.Language;
+import com.model_old.enums.Language;
 import com.langpath.data.repositories.WordRepository;
-import com.common.service.api.TimeLogger;
-import common.model.enums.Count;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -39,4 +36,6 @@ public class WordService implements WordServiceApi {
         searchResults.ifPresent(results -> timeLogger.logTime(methodName,results.size()));
         return searchResults;
     }
+
+
 }

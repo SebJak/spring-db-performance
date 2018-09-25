@@ -1,8 +1,7 @@
 package com.langpath.service.api;
 
-import com.common.service.api.CrudApi;
 import com.langpath.data.model.entity.word.Word;
-import common.model.enums.Language;
+import com.model_old.enums.Language;
 
 import java.util.Collection;
 import java.util.Optional;

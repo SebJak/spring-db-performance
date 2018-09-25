@@ -1,12 +1,13 @@
 package com.langpath.configuration;
 
+import net.sf.log4jdbc.Log4jdbcProxyDataSource;
+import net.sf.log4jdbc.Slf4jSpyLogDelegator;
+import net.sf.log4jdbc.SpyLogDelegator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -22,7 +23,6 @@ import java.util.Properties;
  * Created by Sebastian on 2016-03-14.
  */
 @Configuration
-@EnableJpaRepositories(basePackages = "com.langpath.data.repositories")
 @EnableTransactionManagement
 public class PersistenceConf {
 
@@ -36,7 +36,7 @@ public class PersistenceConf {
         em.setPackagesToScan(env.getRequiredProperty("sql.base.packagesToScan"));
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setGenerateDdl(true);
+        //vendorAdapter.setGenerateDdl(true);
         em.setJpaVendorAdapter(vendorAdapter);
 
         em.setJpaProperties(additionalProperties());
@@ -58,8 +58,8 @@ public class PersistenceConf {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 
-    @Bean
-    public DataSource dataSource(){
+    //@Bean
+    public DataSource dataSourceSpied(){
         final String password = env.getRequiredProperty("sql.dataBase.password");
         final String user = env.getRequiredProperty("sql.dataBase.user");
         final String url = env.getProperty("sql.dataBase.url");
@@ -74,17 +74,26 @@ public class PersistenceConf {
     }
 
     @Bean
+    public Log4jdbcProxyDataSource dataSource() {
+        Log4jdbcProxyDataSource proxyDataSource = new Log4jdbcProxyDataSource(dataSourceSpied());
+        return proxyDataSource;
+    }
+
+    @Bean
     public Properties additionalProperties() {
-        final String hbm2ddl = env.getRequiredProperty("hibernate.hbm2ddl.auto");
+        //final String hbm2ddl = env.getRequiredProperty("hibernate.hbm2ddl.auto");
         final String dialect = env.getRequiredProperty("hibernate.dialect");
         final String generateDdl = env.getRequiredProperty("spring.jpa.generate-ddl");
         final String showSql = env.getRequiredProperty("hibernate.show_sql");
         
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", hbm2ddl);
+        //properties.setProperty("hibernate.hbm2ddl.auto", hbm2ddl); //Update for updating schema validate for validating.
+        //properties.setProperty("spring.jpa.generate-ddl", generateDdl);
         properties.setProperty("hibernate.dialect", dialect);
-        properties.setProperty("spring.jpa.generate-ddl", generateDdl);
         properties.setProperty("hibernate.show_sql", showSql);
+        properties.setProperty("hibernate.jdbc.batch_size","50");
+        properties.setProperty("hibernate.order_inserts","true");
+        properties.setProperty("hibernate.order_updates","true");
 
         return properties;
     }

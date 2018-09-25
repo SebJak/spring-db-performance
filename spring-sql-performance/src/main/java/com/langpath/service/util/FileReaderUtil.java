@@ -1,9 +1,5 @@
 package com.langpath.service.util;
 
-import com.langpath.service.impl.WordGroupService;
-import com.langpath.data.model.entity.word.Word;
-import com.langpath.data.model.entity.word.WordGroup;
-import common.model.enums.Language;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -13,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * Created by Sebastian on 2016-03-19.
@@ -22,8 +19,7 @@ public class FileReaderUtil {
 
     private final Path FILE_PATH;
 
-    @Autowired
-    private WordGroupService wordGroupService;
+    private final static int lineNumber = 5824;
 
     @Autowired
     public FileReaderUtil(@Value("${words.fileName}") final String fileName) {
@@ -39,6 +35,21 @@ public class FileReaderUtil {
             e.printStackTrace();
         }
         return lines;
+    }
+
+    public List<String> readRandomLines(int count) {
+        assert FILE_PATH != null : "The FILE_PATH is null, You need to initialize FileReaderUtil.";
+        List<String> returnLines = new ArrayList<>();
+        int randomLine = (int )(Math.random() * (lineNumber - count));
+        try {
+            try (Stream<String> lines = Files.lines(FILE_PATH)) {
+                lines.skip(randomLine).limit(count).forEach(returnLines::add);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return returnLines;
     }
 
 //    public Collection<Word> readWords(int count) {

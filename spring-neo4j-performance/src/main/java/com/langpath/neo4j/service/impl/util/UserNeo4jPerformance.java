@@ -1,9 +1,8 @@
 package com.langpath.neo4j.service.impl.util;
 
 
-import com.common.service.api.CheckPerformanceApi;
-import com.common.service.api.CrudApi;
-import com.common.service.api.EntityFactoryBuilder;
+import com.service.api.CrudApi;
+import com.service.api.EntityFactoryBuilder;
 import com.langpath.neo4j.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,6 +17,7 @@ import java.util.Optional;
  * Created by Sebastian on 2016-04-03.
  */
 @Service("userNeo4jPerformance")
+//@Transactional
 public class UserNeo4jPerformance implements CheckPerformanceApi<User> {
 
     @Autowired
@@ -31,23 +31,28 @@ public class UserNeo4jPerformance implements CheckPerformanceApi<User> {
 
     @Override
     public User saveOne() {
-        List<User> userList = new ArrayList<>(userBuilder.build(1));
+        List<User> userList = new ArrayList<>(userBuilder.buildAndPersist(1));
         return userList.get(0);
     }
 
     @Override
     public Collection<User> saveCollection() {
-        Collection<User> users = userBuilder.build(100);
+        Collection<User> users = userBuilder.buildAndPersist(100);
         return users;
     }
 
     @Override
-    public User update() {
+    public User updateOne() {
         return update(100);
     }
 
+    @Override
+    public Iterable<User> updateCollection() {
+        return null;
+    }
+
     private User update(int times) {
-        List<User> users = new ArrayList<>(userBuilder.build(1));
+        List<User> users = new ArrayList<>(userBuilder.buildAndPersist(times));
         for (int i = 0; i < times; i++)
             users.forEach(u -> userCrudService.update(u));
         return users.get(0);
@@ -55,7 +60,7 @@ public class UserNeo4jPerformance implements CheckPerformanceApi<User> {
 
     @Override
     public User remove() {
-        List<User> users = new ArrayList<>(userBuilder.build(1));
+        List<User> users = new ArrayList<>(userBuilder.buildAndPersist(1));
         users.forEach(u -> userCrudService.remove(u));
         return users.get(0);
     }

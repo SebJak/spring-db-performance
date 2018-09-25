@@ -1,10 +1,9 @@
 package com.langpath.mongo.model;
 
-import common.model.enums.Language;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Map;
+import java.util.List;
 
 /**
  * Created by Sebastian on 2016-05-03.
@@ -14,8 +13,8 @@ public class FishCard implements Serializable {
 
     final static long serialVersionUID = 1l;
 
-    private Word word;
+    private Word word; //FIXME remove it and store only list fo words.
 
-    private Map<Language, Word> meanings;
+    private List<Word> meanings;
 
 }

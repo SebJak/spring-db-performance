@@ -1,8 +1,9 @@
 package com.langpath.data.model.entity.word;
 
-import com.langpath.data.model.entity.base.BaseEntity;
-import common.model.enums.Language;
-import lombok.*;
+import com.model_old.enums.Language;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,28 +17,40 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name="WORD")
-public class Word extends BaseEntity {
+public class Word {
 
     @Getter(AccessLevel.NONE)
     final static long serialVersionUID = 1l;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @Id
+    @Column(name = "ID", columnDefinition = "serial")
+    @SequenceGenerator(name="word_id_seq",
+            sequenceName="word_id_seq",
+            allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator="word_id_seq")
+    private Long id;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "sourceId")
     private Word source;
 
     @Enumerated(EnumType.STRING)
+    @Column(length = 64)
     private Language lang;
 
+    @Column(length = 64)
     private String value;
 
-    @ManyToOne(cascade = CascadeType.MERGE )
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "wordGroupId")
     private WordGroup wordGroup;
 
-    @Column()
-    private long wrongAnswers;
+    @Column(columnDefinition = "integer default 0")
+    private int wrongAnswers;
 
-    private long goodAnswers;
+    @Column(columnDefinition = "integer default 0")
+    private int goodAnswers;
 
     private Date lastTraining;
 

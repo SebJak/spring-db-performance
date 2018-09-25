@@ -1,7 +1,6 @@
 package com.langpath.data.model.entity.base;
 
 import lombok.AccessLevel;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,11 +18,10 @@ import java.io.Serializable;
 public class BaseEntity implements Serializable {
 
     @Getter(AccessLevel.NONE)
-    final static long serialVersionUID = 1l;
+    final static long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
+    @Column(name = "ID", columnDefinition = "serial")
     private Long id;
 
     @Override

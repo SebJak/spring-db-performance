@@ -1,7 +1,7 @@
 package com.langpath.service.impl;
 
 import com.langpath.Application;
-import common.model.AggregationWordGroup;
+import com.model_old.AggregationWordGroup;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

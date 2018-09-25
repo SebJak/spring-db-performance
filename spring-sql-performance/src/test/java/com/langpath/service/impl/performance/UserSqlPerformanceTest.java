@@ -2,7 +2,6 @@ package com.langpath.service.impl.performance;
 
 import com.langpath.Application;
 import com.langpath.data.model.entity.user.User;
-import com.common.service.api.CheckPerformanceApi;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,8 @@ public class UserSqlPerformanceTest {
 
     @Test
     public void testSaveOne() throws Exception {
-        assertNotNull(userSqlPerformance.saveOne());
+        for(int i=0;i<1000;i++)
+            assertNotNull(userSqlPerformance.saveOne());
     }
 
     @Test
@@ -39,12 +39,20 @@ public class UserSqlPerformanceTest {
 
     @Test
     public void testUpdate() throws Exception {
-        assertNotNull(userSqlPerformance.update());
+        for(int i=0;i<1000;i++)
+            assertNotNull(userSqlPerformance.updateOne());
+    }
+
+    @Test
+    public void testUpdateCollection() throws Exception {
+        for(int i=0;i<100;i++)
+            assertNotNull(userSqlPerformance.updateCollection());
     }
 
     @Test
     public void testRemove() throws Exception {
-
+        for(int i=0;i<100;i++)
+            assertNotNull(userSqlPerformance.remove());
     }
 
     @Test

@@ -5,6 +5,7 @@ import com.langpath.data.repositories.UserRepository;
 import com.langpath.exceptions.FailLoginException;
 import com.langpath.service.api.SecurityUserApi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.Optional;
@@ -12,6 +13,7 @@ import java.util.Optional;
 /**
  * Created by Sebastian on 2016-03-31.
  */
+@Service //FIXME
 public class SecurityUserService implements SecurityUserApi {
 
     //http://stackoverflow.com/questions/10826293/restful-authentication-via-spring
