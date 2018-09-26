@@ -1,6 +1,7 @@
 package com.langpath.mongo.repository;
 
 import com.langpath.mongo.model.WordGroup;
+import org.bson.types.ObjectId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -15,7 +16,7 @@ import java.util.Set;
 @Repository
 public interface WordGroupRepository extends MongoRepository<WordGroup, String> {
 
-    WordGroup findByIdInOrderByFishCardsMeaningsWrongAnswers(Set<String> wordGroup);
+    WordGroup findByIdInOrderByFishCardsMeaningsWrongAnswers(Set<ObjectId> wordGroup);
 
     /*
     findByIdInOrderByFishCardsMeaningWrongAnswers

@@ -20,6 +20,9 @@ import java.util.Set;
 @Document(collection = "users")
 public class User implements Serializable{
 
+    @Id
+    private String id;
+
     @Indexed
     private String nick;
 
@@ -34,21 +37,21 @@ public class User implements Serializable{
 
     private Role role;
 
-    private Map<ObjectId, Word> wordGroups;
+    private Map<ObjectId, WordGroup> wordGroups;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return nick.equals(user.nick) && (email != null ? email.equals(user.email) : user.email == null);
+        return nick.equals(user.nick) && email.equals(user.email);
 
     }
 
     @Override
     public int hashCode() {
         int result = nick.hashCode();
-        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + email.hashCode();
         return result;
     }
 

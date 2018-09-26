@@ -8,11 +8,13 @@ import com.langpath.mongo.repository.UserRepository;
 import com.langpath.mongo.repository.WordGroupRepository;
 import com.langpath.mongo.comparator.FishCardWrongAnswerComparator;
 import com.langpath.mongo.comparator.WordWorstAnsweredComparator;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -30,8 +32,8 @@ class FindWorstAnsweredWord {
 
     Optional<Word> findWorstAnsweredGroup(String userId) {
         User user = userRepository.findById(userId).orElseThrow(()-> new IllegalStateException("Can not find user with id:"+userId));
-        Set<String> wgIds = user.getWordGroups();
-        WordGroup wg = groupRepository.findByIdInOrderByFishCardsMeaningsWrongAnswers(wgIds);
+        Map<ObjectId, WordGroup> wgIds = user.getWordGroups();
+        WordGroup wg = groupRepository.findByIdInOrderByFishCardsMeaningsWrongAnswers(wgIds.keySet());
         Optional<FishCard> fishCard = wg.getFishCards().stream().sorted(new FishCardWrongAnswerComparator()).findFirst();
         Optional<Word> word = fishCard.get().getMeanings().stream().sorted(new WordWorstAnsweredComparator()).findFirst();
 

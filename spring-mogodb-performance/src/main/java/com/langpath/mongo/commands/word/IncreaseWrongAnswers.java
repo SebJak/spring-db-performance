@@ -22,14 +22,7 @@ class IncreaseWrongAnswers {
     @Autowired
     private WordGroupRepository repository;
 
-    @Autowired
-    @Lazy
-    @Qualifier("mongoTimeLogger")
-    private TimeLogger timeLogger;
-
     void increaseWrongAnswers(final String wgId, final String value) {
-        final String METHOD = "UPDATE";
-        timeLogger.start();
         Optional<WordGroup> wordGroup = repository.findById(wgId);
         wordGroup.map(wg -> {
             List<FishCard> fishCards = new ArrayList<>(wordGroup.get().getFishCards());
@@ -47,6 +40,5 @@ class IncreaseWrongAnswers {
             });
             return repository.save(wg);
         });
-        timeLogger.logTime(METHOD, Count.ONE.getCount());
     }
 }

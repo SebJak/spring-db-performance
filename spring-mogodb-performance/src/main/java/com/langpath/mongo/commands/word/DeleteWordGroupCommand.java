@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 @Service
 class DeleteWordGroupCommand {
 
-    private UserRepository wgRepository;
+    private UserRepository userRepository;
 
-    public DeleteWordGroupCommand(UserRepository wgRepository) {
-        this.wgRepository = wgRepository;
+    public DeleteWordGroupCommand(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     void removeWordGroup(final String userId, final String wordGroupId) {
-        wgRepository.findById(userId).map(u -> u.removeWordGroup(wordGroupId)).ifPresent(u -> wgRepository.save(u));
+        userRepository.findById(userId).map(u -> u.removeWordGroup(wordGroupId)).ifPresent(u -> userRepository.save(u));
     }
 
 }

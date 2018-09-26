@@ -18,6 +18,8 @@ import java.util.Date;
 @Data
 public class WordGroup implements Serializable {
 
+    private String id;
+
     private String name;
 
     private Collection<FishCard> fishCards;
@@ -38,7 +40,7 @@ public class WordGroup implements Serializable {
         if (!(o instanceof WordGroup)) return false;
 
         WordGroup wordGroup = (WordGroup) o;
-        return name != null ? name.equals(wordGroup.name) : wordGroup.name == null;
+        return name.equals(wordGroup.name);
 
     }
 

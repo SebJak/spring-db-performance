@@ -15,7 +15,7 @@ import java.util.List;
 public class FindWorstAnsweredWordTest extends AbstractTestMongo{
 
     @Autowired
-    FindWorstAnsweredWord command; n r
+    FindWorstAnsweredWord command;
 
     @Autowired
     UserRepository repository;
