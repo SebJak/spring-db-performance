@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -37,7 +38,7 @@ public class User implements Serializable{
 
     private Role role;
 
-    private Map<ObjectId, WordGroup> wordGroups;
+    private Map<ObjectId, WordGroup> wordGroups = new HashMap<>();
 
     @Override
     public boolean equals(Object o) {
@@ -57,6 +58,11 @@ public class User implements Serializable{
 
     public User removeWordGroup(String wgId) {
         getWordGroups().remove(new ObjectId(wgId));
+        return this;
+    }
+
+    public User addWordGroup(WordGroup wg) {
+        getWordGroups().put(new ObjectId(wg.getId()), wg);
         return this;
     }
 }

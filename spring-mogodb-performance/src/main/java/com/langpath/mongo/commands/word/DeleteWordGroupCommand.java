@@ -1,7 +1,12 @@
 package com.langpath.mongo.commands.word;
 
+import com.langpath.mongo.model.User;
 import com.langpath.mongo.repository.UserRepository;
+import com.service.api.CrudApi;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
  * Created by root on 12.10.16.
@@ -9,14 +14,14 @@ import org.springframework.stereotype.Service;
 @Service
 class DeleteWordGroupCommand {
 
-    private UserRepository userRepository;
+    private CrudApi<User, String> userCrud;
 
-    public DeleteWordGroupCommand(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public DeleteWordGroupCommand(@Qualifier("userCrudService") CrudApi userCrud) {
+        this.userCrud = userCrud;
     }
 
     void removeWordGroup(final String userId, final String wordGroupId) {
-        userRepository.findById(userId).map(u -> u.removeWordGroup(wordGroupId)).ifPresent(u -> userRepository.save(u));
+        userCrud.findById(userId).flatMap(u -> Optional.of(u.removeWordGroup(wordGroupId))).ifPresent(u -> userCrud.save(u));
     }
 
 }
