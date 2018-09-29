@@ -9,8 +9,10 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by Sebastian on 2016-04-27.
@@ -22,17 +24,15 @@ public class WordGroup implements Serializable {
 
     private String name;
 
-    private Collection<FishCard> fishCards;
+    private Map<Word, Word> fishCards;
 
-    private Date lastActivity;
+    private LocalDateTime lastActivity;
 
-    private Date createdDate;
+    private LocalDateTime createdDate = LocalDateTime.now();
 
     private String description;
 
     private Language sourceLang;
-
-    private ValidationState validation;
 
     @Override
     public boolean equals(Object o) {

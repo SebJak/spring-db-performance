@@ -11,7 +11,7 @@ public class WordWorstAnsweredComparator implements Comparator<Word> {
 
     @Override
     public int compare(Word word, Word t1) {
-        return t1.getWrongAnswers() - word.getWrongAnswers();
+        return t1.getAnswers() - word.getAnswers();
     }
 
 }

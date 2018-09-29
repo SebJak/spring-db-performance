@@ -21,7 +21,7 @@ public interface WordRepository extends JpaRepository<Word, Long> {
     Collection<Word> findByLang(Language lang);
 
     @Modifying
-    @Query(value = "update Word w set w.wrongAnswers = w.wrongAnswers + 1 where w.id=?1")
+    @Query(value = "update Word w set w.answers = w.answers + 1 where w.id=?1")
     void increaseWrongAnswers(long id);
 
     @Query(value = "SELECT * from getWorstAnsweredWord(?1)", nativeQuery = true)
@@ -36,13 +36,13 @@ public interface WordRepository extends JpaRepository<Word, Long> {
 
     public String valueWord;
 
-    public int wrongAnswers;
+    public int answers;
 
 SELECT t.tokenName FROM Role r JOIN r.tkns t WHERE r.roleId = :roleId
 
 
 
-SELECT w.id wordId, wg.id wordGroupId, w.value valueWord, u.id userId, max(w.wronganswers) wrongAnswers
+SELECT w.id wordId, wg.id wordGroupId, w.value valueWord, u.id userId, max(w.wronganswers) answers
 FROM public.word_group  wg
 INNER JOIN public.usr_word_gr as uw
     ON wg.id = uw.word_group_id

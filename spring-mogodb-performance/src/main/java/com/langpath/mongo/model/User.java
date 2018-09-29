@@ -38,7 +38,7 @@ public class User implements Serializable{
 
     private Role role;
 
-    private Map<ObjectId, WordGroup> wordGroups = new HashMap<>();
+    private Map<String, WordGroup> wordGroups = new HashMap<>();
 
     @Override
     public boolean equals(Object o) {
@@ -57,12 +57,17 @@ public class User implements Serializable{
     }
 
     public User removeWordGroup(String wgId) {
-        getWordGroups().remove(new ObjectId(wgId));
+        getWordGroups().remove(wgId);
         return this;
     }
 
     public User addWordGroup(WordGroup wg) {
-        getWordGroups().put(new ObjectId(wg.getId()), wg);
+        getWordGroups().put(wg.getId(), wg);
+        return this;
+    }
+
+    public User updateWordGroup(WordGroup wg) {
+        getWordGroups().computeIfPresent(wg.getId(), (k, v) -> wg);
         return this;
     }
 }
