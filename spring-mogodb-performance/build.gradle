@@ -16,6 +16,6 @@ dependencies {
         exclude module: 'spring-data-commons'
     }
 
-    testCompile group: "de.flapdoodle.embed", name: "de.flapdoodle.embed.mongo", version: "2.0.1"
+   // testCompile group: "de.flapdoodle.embed", name: "de.flapdoodle.embed.mongo", version: "2.0.1"
 
 }

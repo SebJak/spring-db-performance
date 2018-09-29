@@ -19,4 +19,8 @@ dependencies {
     compile 'com.ryantenney.metrics:metrics-spring:3.1.2'
 
     compile 'com.google.guava:guava:19.0'
+
+// https://mvnrepository.com/artifact/org.springframework/spring-test
+    testCompile group: 'org.springframework', name: 'spring-test', version: '5.1.0.RELEASE'
+
 }

@@ -1,44 +1,95 @@
 package com.langpath.mongo.commands.word;
 
-import com.langpath.mongo.MongoApplication;
+import com.langpath.mongo.model.User;
 import com.langpath.mongo.model.WordGroup;
-import com.langpath.mongo.repository.WordGroupRepository;
+import com.service.api.CrudApi;
+import org.bson.types.ObjectId;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.*;
+import java.util.Optional;
 
 /**
  * Created by root on 12.10.16.
  */
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(MongoApplication.class)
-@ActiveProfiles(value = "test")
+@RunWith(SpringRunner.class)
+@ContextConfiguration
 public class DeleteWordGroupCommandTest {
 
     @Autowired
     DeleteWordGroupCommand command;
 
     @Autowired
-    WordGroupRepository repository;
+    private CrudApi<User, String> userCrud;
+
 
     @Test
-    public void removeWordGroup() throws Exception {
-        Page<WordGroup> pages = repository.findAll(new PageRequest(1,200));
-        pages.forEach(wordGroup -> {
-            command.removeWordGroup(wordGroup.getId());
-
-        });
-        //{ _id: ObjectId("57fd104900b2abf9b9bde94c") }
-        //> db.users.find({ wordGroups: { $in: ["57fd104900b2abf9b9bde94c"]} })
-
+    public void shouldRemoveWordGroup() throws Exception {
+        //given
+        ObjectId id = new ObjectId();
+        User user = mockUser(id);
+        Mockito.when(userCrud.findById(id.toHexString())).thenReturn(Optional.of(user));
+        //when
+        command.removeWordGroup(id.toHexString(), id.toHexString());
+        //then
+        Assert.assertEquals(0, user.getWordGroups().size());
     }
+
+    @Test
+    public void shouldNotFindWordGroup() throws Exception {
+        //given
+        ObjectId id = new ObjectId();
+        User user = mockUser(id);
+        Mockito.when(userCrud.findById(id.toHexString())).thenReturn(Optional.of(user));
+        //when
+        command.removeWordGroup(id.toHexString(), new ObjectId().toHexString());
+        //then
+        Assert.assertEquals(1, user.getWordGroups().size());
+    }
+
+    @Test
+    public void shouldNotFindUser() throws Exception {
+        //given
+        ObjectId id = new ObjectId();
+        User user = mockUser(id);
+        Mockito.when(userCrud.findById(Matchers.anyString())).thenReturn(Optional.empty());
+        //when
+        command.removeWordGroup(new ObjectId().toHexString(), id.toHexString());
+        //then
+        Assert.assertEquals(1, user.getWordGroups().size());
+    }
+
+    @Configuration
+    static class Config {
+
+        @Bean
+        CrudApi<User, String> userCrudService() {
+            return Mockito.mock(CrudApi.class);
+        }
+
+        @Bean
+        DeleteWordGroupCommand deleteWordGroupCommand(CrudApi crudApi) {
+            return new DeleteWordGroupCommand(crudApi);
+        }
+    }
+
+    private User mockUser(ObjectId id) {
+        User u = new User();
+        u.setId(id.toHexString());
+        WordGroup wordGroup = new WordGroup();
+        wordGroup.setId(id.toHexString());
+        u.addWordGroup(wordGroup);
+        return u;
+    }
+
 
 }

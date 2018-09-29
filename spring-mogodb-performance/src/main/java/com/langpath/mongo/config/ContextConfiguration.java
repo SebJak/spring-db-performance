@@ -22,24 +22,17 @@ public class ContextConfiguration {
     private Environment env;
 
     @Bean(name="userCrudService")
-    public CrudApi<User, String> getUserCrudService(@Autowired UserRepository userRepository,
-                                                    @Autowired  @Qualifier("mongoTimeLogger") TimeLogger timeLogger) {
-        return new CrudImpl<>(userRepository, timeLogger);
+    public CrudApi<User, String> getUserCrudService(@Autowired UserRepository userRepository) {
+        return new CrudImpl<>(userRepository);
     }
 
     @Bean(name="wordGroupCrudService")
-    public CrudApi<WordGroup, String> getWordGroupCrudService(@Autowired WordGroupRepository wordGroupRepository,
-                                                              @Autowired  @Qualifier("mongoTimeLogger") TimeLogger timeLogger) {
-        return new CrudImpl<>(wordGroupRepository, timeLogger);
-    }
-
-    @Bean(name = "mongoTimeLogger")
-    public TimeLogger getTimeLogger() {
-        return new TimeLogger(env.getRequiredProperty("mongoTime.log"));
+    public CrudApi<WordGroup, String> getWordGroupCrudService(@Autowired WordGroupRepository wordGroupRepository) {
+        return new CrudImpl<>(wordGroupRepository);
     }
 
     @Bean(name = "FileReaderUtil")
     public FileReaderUtil getFileReaderUtil() {
-        return new FileReaderUtil(env.getRequiredProperty("words.fileName"));
+        return new FileReaderUtil();
     }
 }
