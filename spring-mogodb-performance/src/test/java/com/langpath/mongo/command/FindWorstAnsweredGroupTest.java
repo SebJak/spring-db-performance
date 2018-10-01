@@ -3,7 +3,6 @@ package com.langpath.mongo.command;
 import com.langpath.mongo.model.User;
 import com.langpath.mongo.model.WordGroup;
 import com.model_old.enums.Role;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -17,14 +16,6 @@ import static org.junit.Assert.assertEquals;
 public class FindWorstAnsweredGroupTest {
 
     private FindWorstAnsweredGroup command = new FindWorstAnsweredGroup();
-
-    @Test
-    @Ignore
-    public void shouldNotFindUser() {
-        Optional<WordGroup> result = command.findWorstAnsweredGroup(null);
-
-        assertEquals(Optional.empty(), result);
-    }
 
     @Test
     public void shouldNotFindGroupForUser() {
