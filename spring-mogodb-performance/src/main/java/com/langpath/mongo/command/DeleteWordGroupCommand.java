@@ -22,7 +22,7 @@ class DeleteWordGroupCommand {
 
     void removeWordGroup(final String userId, final String wordGroupId) {
         userCrud.findById(userId)
-                .flatMap(u -> Optional.of(u.removeWordGroup(wordGroupId)))
+                .flatMap(u -> Optional.ofNullable(u.removeWordGroup(wordGroupId)))
                 .ifPresent(u -> userCrud.save(u));
     }
 
