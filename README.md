@@ -3,11 +3,13 @@
 In this project is mainly focused on finding the difference of usage between:  
 - Spring-sql
 - Spring-mongodb
-- Spring-neo4j 
+- Spring-neo4j
+
+Project is separated into each database as a module.
 
 ## Getting Started
 
-Please clone source code from: [spring-db-perormance](https://github.com/SebJak/spring-db-performance.git).
+Please clone source code from: [spring-db-performance](https://github.com/SebJak/spring-db-performance.git).
 
 You need have installed:
 - Java 8
