@@ -1,6 +1,7 @@
 package com.langpath.mongo.model;
 
 import com.model_old.enums.Language;
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -9,9 +10,8 @@ import java.io.Serializable;
  * Created by Sebastian on 2016-04-27.
  */
 @Data
-public class Word implements Serializable {
-
-    final static long serialVersionUID = 1l;
+@Builder
+public class Word {
 
     private String value;
 
@@ -21,6 +21,7 @@ public class Word implements Serializable {
 
     private Language lang;
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -28,10 +29,7 @@ public class Word implements Serializable {
 
         Word word = (Word) o;
 
-        if (answers != word.answers) return false;
-        if (!value.equals(word.value)) return false;
-        if (example != null ? !example.equals(word.example) : word.example != null) return false;
-        return lang == word.lang;
+        return value.equals(word.value) && (example != null ? example.equals(word.example) : word.example == null) && lang == word.lang;
 
     }
 
@@ -39,7 +37,6 @@ public class Word implements Serializable {
     public int hashCode() {
         int result = value.hashCode();
         result = 31 * result + (example != null ? example.hashCode() : 0);
-        result = 31 * result + answers;
         result = 31 * result + lang.hashCode();
         return result;
     }

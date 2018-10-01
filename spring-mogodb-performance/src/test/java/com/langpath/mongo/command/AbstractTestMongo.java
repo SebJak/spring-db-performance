@@ -1,10 +1,8 @@
-package com.langpath.mongo.commands.word;
+package com.langpath.mongo.command;
 
-import com.langpath.mongo.MongoApplication;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -13,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(MongoApplication.class)
+//@SpringApplicationConfiguration(MongoApplication.class)
 @ActiveProfiles(value = "test")
 public abstract class AbstractTestMongo {
 //    private static MongodExecutable mongodExecutable;

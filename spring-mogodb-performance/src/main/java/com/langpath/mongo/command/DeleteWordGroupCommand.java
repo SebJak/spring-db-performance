@@ -1,4 +1,4 @@
-package com.langpath.mongo.commands.word;
+package com.langpath.mongo.command;
 
 import com.langpath.mongo.model.User;
 import com.langpath.mongo.repository.UserRepository;
@@ -16,12 +16,14 @@ class DeleteWordGroupCommand {
 
     private CrudApi<User, String> userCrud;
 
-    public DeleteWordGroupCommand(@Qualifier("userCrudService") CrudApi userCrud) {
+    DeleteWordGroupCommand(@Qualifier("userCrudService") CrudApi userCrud) {
         this.userCrud = userCrud;
     }
 
     void removeWordGroup(final String userId, final String wordGroupId) {
-        userCrud.findById(userId).flatMap(u -> Optional.of(u.removeWordGroup(wordGroupId))).ifPresent(u -> userCrud.save(u));
+        userCrud.findById(userId)
+                .flatMap(u -> Optional.of(u.removeWordGroup(wordGroupId)))
+                .ifPresent(u -> userCrud.save(u));
     }
 
 }

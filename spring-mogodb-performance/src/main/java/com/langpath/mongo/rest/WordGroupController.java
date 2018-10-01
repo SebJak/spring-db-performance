@@ -5,7 +5,12 @@ import com.langpath.mongo.model.WordGroup;
 import com.service.api.CrudApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+import java.util.Optional;
 
 @RestController()
 public class WordGroupController {
@@ -18,23 +23,31 @@ public class WordGroupController {
     public void createWordGroup(@PathVariable String userId, @RequestBody WordGroup wordGroup) {
         userCrudService.findById(userId)
                 .map(user -> user.addWordGroup(wordGroup))
-                .map(user -> userCrudService.save(user))
-        .orElseThrow(()-> {throw new IllegalStateException("Can not save word group for current user");});
+                .ifPresent(user -> userCrudService.save(user));
     }
 
     @GetMapping(path = "{userId}/wordGroup/{wordGroupId}") //FIXME Check how to return 404 in case of not found.
-    public WordGroup getWordGroup(@PathVariable String userId, @PathVariable String wordGroupId) {
-        return userCrudService.findById(userId)
-                .map(user -> user.getWordGroups().get(wordGroupId))
-                .orElseThrow(()-> {throw new IllegalStateException("Can not find word group for current user");});
+    public ResponseEntity<WordGroup> getWordGroup(@PathVariable String userId, @PathVariable String wordGroupId) {
+        Optional<WordGroup> result = userCrudService.findById(userId)
+                .map(user -> user.getWordGroups().get(wordGroupId));
+        return result.map(wordGroup -> new ResponseEntity<>(wordGroup, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+
     }
 
     @PutMapping(path = "{userId}/wordGroup/")
     public void updateWordGroup(@PathVariable String userId, @RequestBody WordGroup wordGroup) {
         userCrudService.findById(userId)
                 .map(user -> user.updateWordGroup(wordGroup))
-                .map(user -> userCrudService.save(user))
-                .orElseThrow(()-> {throw new IllegalStateException("Can not save word group for current user");});
+                .ifPresent(user -> userCrudService.save(user));
+    }
+
+    @GetMapping("/${userId}")
+    public ResponseEntity getUserWordGroupsInfo(@PathVariable String userId){
+        ResponseEntity<Map> response = new ResponseEntity<Map>(HttpStatus.NOT_FOUND);
+
+
+        return response;
     }
 
 

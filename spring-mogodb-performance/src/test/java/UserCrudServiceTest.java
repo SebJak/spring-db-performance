@@ -1,11 +1,9 @@
-import com.service.api.CrudApi;
-import com.langpath.mongo.MongoApplication;
 import com.langpath.mongo.model.User;
+import com.service.api.CrudApi;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -17,7 +15,7 @@ import static org.junit.Assert.assertEquals;
  * Created by Sebastian on 2016-04-27.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(MongoApplication.class)
+//@SpringApplicationConfiguration(MongoApplication.class)
 @ActiveProfiles(value = "test")
 public class UserCrudServiceTest {
 
@@ -27,11 +25,12 @@ public class UserCrudServiceTest {
 
     @Test
     public void createUser(){
-        User user = new User();
-        user.setEmail("email.@email.com");
-        user.setFirstName("Gregor");
-        user.setLastName("Kowalsky");
-        user.setNick("sss");
+        User user = User.builder()
+                .email("email.@email.com")
+                .firstName("Gregor")
+                .lastName("Kowalsky")
+                .nick("sss")
+                .build();
 
         Optional<User> saved = userCrudService.save(user);
 

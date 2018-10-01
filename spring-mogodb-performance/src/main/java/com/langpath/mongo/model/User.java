@@ -1,10 +1,8 @@
 package com.langpath.mongo.model;
 
 import com.model_old.enums.Role;
-import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,12 +10,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by Sebastian on 2016-04-27.
  */
 @Data
+@Builder
 @Document(collection = "users")
 public class User implements Serializable{
 
@@ -67,7 +65,7 @@ public class User implements Serializable{
     }
 
     public User updateWordGroup(WordGroup wg) {
-        getWordGroups().computeIfPresent(wg.getId(), (k, v) -> wg);
+        getWordGroups().put(wg.getId(), wg);
         return this;
     }
 }

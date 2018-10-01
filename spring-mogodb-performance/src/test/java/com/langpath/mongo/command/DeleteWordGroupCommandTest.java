@@ -1,4 +1,4 @@
-package com.langpath.mongo.commands.word;
+package com.langpath.mongo.command;
 
 import com.langpath.mongo.model.User;
 import com.langpath.mongo.model.WordGroup;
@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 /**
@@ -83,10 +84,16 @@ public class DeleteWordGroupCommandTest {
     }
 
     private User mockUser(ObjectId id) {
-        User u = new User();
-        u.setId(id.toHexString());
-        WordGroup wordGroup = new WordGroup();
-        wordGroup.setId(id.toHexString());
+        User u = User.builder()
+                .id(id.toHexString())
+                .wordGroups(new HashMap<>())
+                .build();
+
+        WordGroup wordGroup = WordGroup.builder()
+                .id(id.toHexString())
+                .fishCards(new HashMap<>())
+                .build();
+
         u.addWordGroup(wordGroup);
         return u;
     }
