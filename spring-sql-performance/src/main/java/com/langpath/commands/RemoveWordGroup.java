@@ -17,10 +17,7 @@ public class RemoveWordGroup extends AbstractCommand {
     }
 
     void removeWordGroup(final long wordGroupId) {
-        final String METHOD = "DELETE";
-        timeLogger.start();
         repository.deleteWordGroup(wordGroupId);
-        timeLogger.logTime(METHOD, Count.ONE.getCount());
     }
 
 }

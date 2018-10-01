@@ -1,26 +1,27 @@
 package com.langpath.service.impl;
 
-import static org.junit.Assert.*;
-
-import com.service.api.EntityFactoryBuilder;
 import com.langpath.Application;
 import com.langpath.data.model.entity.user.User;
 import com.langpath.service.api.UserServiceApi;
+import com.service.api.EntityFactoryBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by Sebastian on 2016-03-18.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(Application.class)
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = Application.class)
 @ActiveProfiles(value = "test")
 public class UserServiceTest {
 

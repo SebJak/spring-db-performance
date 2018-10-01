@@ -32,7 +32,6 @@ public class UploadWordsFromFIle extends AbstractCommand {
 
     void addWordsToEachWordGroup() {
         final int count = 15;
-        timeLogger.start();
         Page<WordGroup> wgs = wordGroupRepository.findAll(new PageRequest(1, 100));
         wgs.forEach(wordGroup -> {
             List<String> wordValues = fileReaderUtil.readRandomLines(count);
@@ -43,7 +42,6 @@ public class UploadWordsFromFIle extends AbstractCommand {
             }
             wordRepository.save(words);
         });
-        timeLogger.logTime("AddWords", wgs.getNumberOfElements());
     }
 
     private List<Word> buildOneCouple(String sourceValue, String targetValue){

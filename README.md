@@ -1,6 +1,6 @@
 # Spring-db-performance
 
-In this project is mainly focused on finding the performance difference between:  
+In this project is mainly focused on finding the difference of usage between:  
 - Spring-sql
 - Spring-mongodb
 - Spring-neo4j 

@@ -24,16 +24,10 @@ public class WordGroupService implements WordGroupServiceApi{
     @Autowired
     private WordGroupRepository repository;
 
-    @Autowired
-    @Qualifier("sqlTimeLogger")
-    private TimeLogger timeLogger;
 
     @Override
     public Collection<AggregationWordGroup> getAggregationWordGroup() {
-        final String method = "AGGREGATION_1";
-        timeLogger.start();
         Collection<AggregationWordGroup> results = repository.getAggregation();
-        timeLogger.logTime(method,results.size());
         return results;
     }
 }

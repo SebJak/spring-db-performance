@@ -36,28 +36,21 @@ public class ContextConfiguration {
     @Autowired
     private WordGroupRepository wordGroupRepository;
 
-    @Autowired
-    @Qualifier("sqlTimeLogger")
-    private TimeLogger timeLogger;
 
     @Bean(name = "userCrudService")
     CrudApi<User, Long> getUserCrud() {
-        return new CrudImpl<>(userRepository, timeLogger);
+        return new CrudImpl<>(userRepository);
     }
 
     @Bean(name = "wordCrudService")
     CrudApi<Word, Long> getWordCrud() {
-        return new CrudImpl<>(wordRepository, timeLogger);
+        return new CrudImpl<>(wordRepository);
     }
 
     @Bean(name = "wordGroupCrudService")
     CrudApi<WordGroup, Long> getWordGroupCrud() {
-        return new CrudImpl<>(wordGroupRepository, timeLogger);
+        return new CrudImpl<>(wordGroupRepository);
     }
 
-    @Bean(name = "sqlTimeLogger")
-    public TimeLogger getTimeLogger() {
-        return new TimeLogger(env.getRequiredProperty("sqlTime.log"));
-    }
 
 }

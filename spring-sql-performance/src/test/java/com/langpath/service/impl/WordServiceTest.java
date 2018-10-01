@@ -1,11 +1,9 @@
 package com.langpath.service.impl;
 
-import static org.junit.Assert.*;
-
-import com.service.api.CrudApi;
 import com.langpath.Application;
 import com.langpath.data.model.entity.word.Word;
 import com.langpath.service.util.FileReaderUtil;
+import com.service.api.CrudApi;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,19 +11,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collection;
 import java.util.Optional;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Created by Sebastian on 2016-03-18.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(Application.class)
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = Application.class)
 @ActiveProfiles(value = "test")
 public class WordServiceTest {
 

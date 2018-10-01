@@ -24,16 +24,11 @@ public class WordService implements WordServiceApi {
     @Autowired
     private WordRepository repository;
 
-    @Autowired
-    @Qualifier("sqlTimeLogger")
-    private TimeLogger timeLogger;
 
     @Override
     public Optional<Collection<Word>> findByLang(Language lang) {
         final String methodName = "SELECT_BY_LANG";
-        timeLogger.start();
         Optional<Collection<Word>> searchResults = Optional.ofNullable(repository.findByLang(lang));
-        searchResults.ifPresent(results -> timeLogger.logTime(methodName,results.size()));
         return searchResults;
     }
 

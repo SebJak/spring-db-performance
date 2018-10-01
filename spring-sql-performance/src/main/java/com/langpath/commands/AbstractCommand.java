@@ -9,8 +9,4 @@ import org.springframework.context.annotation.Lazy;
  */
 abstract class AbstractCommand {
 
-    @Lazy
-    @Autowired
-    @Qualifier("sqlTimeLogger")
-    TimeLogger timeLogger;
 }

@@ -23,37 +23,22 @@ public class UserService implements UserServiceApi {
     @Autowired
     private UserRepository repository;
 
-    @Autowired
-    @Qualifier("sqlTimeLogger")
-    private TimeLogger timeLogger;
-
 
     @Override
     public User saveOne(User user) {
-        final String methodName = "SAVE";
-        timeLogger.start();
         User saved = repository.save(user);
-        timeLogger.logTime(methodName, Count.ONE.getCount());
-        //repository.flush();
         return saved;
     }
 
     @Override
     public Collection<User> saveCollection(Collection<User> entities) {
-        final String methodName = "SAVE";
-        timeLogger.start();
         Collection<User> users = repository.save(entities);
-        timeLogger.logTime(methodName, entities.size());
-        //repository.flush();
         return users;
     }
 
     @Override
     public void updateName(User user, String name) {
-        final String methodName = "UPDATE";
-        timeLogger.start();
         repository.updateName(user.getId(), name);
-        timeLogger.logTime(methodName, Count.ONE.getCount());
     }
 
 }

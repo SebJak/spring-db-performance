@@ -1,24 +1,24 @@
 package com.langpath.service.impl;
 
-import static org.junit.Assert.*;
-
-import com.service.api.CrudApi;
 import com.langpath.Application;
 import com.langpath.data.model.entity.user.User;
 import com.langpath.data.model.entity.word.Word;
+import com.service.api.CrudApi;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Sebastian on 2016-04-23.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(Application.class)
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = Application.class)
 @ActiveProfiles(value = "test")
 public class CrudServicesTest {
 

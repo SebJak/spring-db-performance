@@ -24,17 +24,13 @@ public class GetWorstAnsweredWord extends AbstractCommand {
      */
 
     WorstAnsweredWord getWorstWordForUser(long userId) {
-        final String METHOD = "WORST_WORD";
-        timeLogger.start();
         String concatenateResult =  userRepository.getWorstAnswered(userId); //FIXME improve it to @NamedStoredProcedure
         //System.out.println(concatenateResult);
         String[] result =  concatenateResult.split(",");
         if(result!=null && result.length == 5) {
             WorstAnsweredWord info = new WorstAnsweredWord(Integer.parseInt(result[1]), Integer.parseInt(result[2]),result[3], Integer.parseInt(result[0]), Integer.parseInt(result[4]));
-            timeLogger.logTime(METHOD, Count.ONE.getCount());
             return info;
         }
-        timeLogger.logTime(METHOD, Count.ONE.getCount());
         return null;
     }
 }

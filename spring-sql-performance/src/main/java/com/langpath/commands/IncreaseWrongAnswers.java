@@ -17,9 +17,6 @@ public class IncreaseWrongAnswers extends AbstractCommand {
     }
 
     void increaseWrongAnswers(final long wordId) {
-        final String METHOD_NAME = "UPDATE";
-        timeLogger.start();
         wordRepository.increaseWrongAnswers(wordId);
-        timeLogger.logTime(METHOD_NAME, Count.ONE.getCount());
     }
 }
