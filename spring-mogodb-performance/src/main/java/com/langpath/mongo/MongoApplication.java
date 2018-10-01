@@ -10,7 +10,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * Created by Sebastian on 2016-04-27.
  */
 @SpringBootApplication
-@EnableAutoConfiguration
 public class MongoApplication extends SpringBootServletInitializer {
 
 

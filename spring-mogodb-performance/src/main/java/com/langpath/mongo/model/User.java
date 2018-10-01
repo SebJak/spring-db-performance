@@ -36,6 +36,7 @@ public class User implements Serializable{
 
     private Role role;
 
+    @Builder.Default
     private Map<String, WordGroup> wordGroups = new HashMap<>();
 
     @Override

@@ -27,23 +27,20 @@ public class WordGroup implements Serializable {
 
     private String name;
 
-    private Map<Word, Word> fishCards;
-
     private LocalDateTime lastActivity;
-
-    private LocalDateTime createdDate = LocalDateTime.now();
 
     private String description;
 
     private Language sourceLang;
 
+    @Builder.Default
+    private LocalDateTime createdDate = LocalDateTime.now();
+
+    @Builder.Default
+    private Map<Word, Word> fishCards = new HashMap<>();
+
+    @Builder.Default
     private Long positiveAnswers = 0L;
-
-    public static class WordGroupBuilder{
-        private LocalDateTime createdDate = LocalDateTime.now();
-        private Map<Word, Word> fishCards = new HashMap<>();
-
-    }
 
     @Override
     public boolean equals(Object o) {

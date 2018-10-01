@@ -1,11 +1,7 @@
 package com.langpath.mongo.command;
 
 import com.langpath.mongo.model.User;
-import com.langpath.mongo.model.Word;
 import com.langpath.mongo.model.WordGroup;
-import com.langpath.mongo.repository.UserRepository;
-import com.langpath.mongo.repository.WordGroupRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;

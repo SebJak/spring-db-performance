@@ -22,7 +22,7 @@ dependencies {
     compile 'com.ryantenney.metrics:metrics-spring:3.1.2'
 
     //Tools
-    compile 'org.projectlombok:lombok:1.16.8'
+    compile 'org.projectlombok:lombok:1.16.18'
 
     compile 'com.google.guava:guava:19.0'
 
