@@ -42,7 +42,7 @@ public class WordGroupController {
                 .ifPresent(user -> userCrudService.save(user));
     }
 
-    @GetMapping("/${userId}")
+    @GetMapping("/{userId}")
     public ResponseEntity getUserWordGroupsInfo(@PathVariable String userId){
         ResponseEntity<Map> response = new ResponseEntity<Map>(HttpStatus.NOT_FOUND);
 
